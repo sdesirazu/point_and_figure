@@ -3,6 +3,7 @@ import json
 import os
 import sys
 from google.oauth2 import service_account
+from point_and_figure import PointAndFigure 
 
 try:
     step = float(sys.argv[1])
