@@ -169,6 +169,6 @@ class PointAndFigure:
             for j in range(width):
                 chart += grid[i][j]
             chart += "\n"
-        print(chart))
+        print(chart)
 
         return chart
