@@ -43,7 +43,10 @@ class PointAndFigure:
                     return 11
 
     def chart(self):
+
+        print(self.startDate)
         hist = self.instrument.history(start=self.startDate, end=self.endDate)
+        print(self.instrument)
         df = pd.DataFrame({'Date':hist['Close'].index, 'Close': hist['Close'].values})
 
         close_prices = df['Close']
