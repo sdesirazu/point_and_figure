@@ -46,17 +46,20 @@ class PointAndFigure:
 
         print(self.startDate)
         hist = self.instrument.history(start=self.startDate, end=self.endDate)
-        print(self.instrument)
         df = pd.DataFrame({'Date':hist['Close'].index, 'Close': hist['Close'].values})
 
         close_prices = df['Close']
         dates = df['Date']
 
         current = self.floor_to_nearest(close_prices[0])
+        print(current)
         min_price = self.floor_to_nearest(min(close_prices))
+        print(min_price)
         max_price = self.floor_to_nearest(max(close_prices))
+        print(max_price)
 
         height = round((max_price-min_price)/self.step)+1
+        print(height)
         width = 100
         grid = [[' ' for _ in range(width)] for _ in range(height)]
 
