@@ -84,6 +84,7 @@ class PointAndFigure:
                     newMonth = True
 
             price_rounded = self.floor_to_nearest(close_price)
+            print(price_rounded)
             if trend == 1:
                 if price_rounded > current:
                     for i in range(0, round((price_rounded-current)/self.step)):
@@ -161,8 +162,6 @@ class PointAndFigure:
             dateIndex += 1
 
         #print the chart
-        print("srinivas")
-
         chart = ""
         for i in range(height):
             chart += "{:>4.1f} ".format((startRow-i)*self.step+b)
