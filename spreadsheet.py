@@ -5,15 +5,16 @@ import sys
 from google.oauth2 import service_account
 
 try:
-    startDate = sys.argv[1]
-except:
-    print("invalid or missing start date")
-    
-try:
-    step = float(sys.argv[2])
+    step = float(sys.argv[1])
 except:
     print("invalid or missing step value")
 
+
+try:
+    startDate = sys.argv[2]
+except:
+    print("invalid or missing start date")
+    
 
 scopes = [
 'https://www.googleapis.com/auth/spreadsheets',
