@@ -37,7 +37,7 @@ sheet = file.open("pnf") #open sheet
 
 print("desirazu")
 
-sheet = sheet.Sheet1 #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+sheet = sheet.sheet1 #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
