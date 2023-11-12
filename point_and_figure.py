@@ -52,14 +52,10 @@ class PointAndFigure:
         dates = df['Date']
 
         current = self.floor_to_nearest(close_prices[0])
-        print(current)
         min_price = self.floor_to_nearest(min(close_prices))
-        print(min_price)
         max_price = self.floor_to_nearest(max(close_prices))
-        print(max_price)
 
         height = round((max_price-min_price)/self.step)+1
-        print(height)
         width = 100
         grid = [[' ' for _ in range(width)] for _ in range(height)]
 
@@ -165,10 +161,14 @@ class PointAndFigure:
             dateIndex += 1
 
         #print the chart
+        print("srinivas")
+
         chart = ""
         for i in range(height):
             chart += "{:>4.1f} ".format((startRow-i)*self.step+b)
             for j in range(width):
                 chart += grid[i][j]
             chart += "\n"
+        print(chart))
+
         return chart
