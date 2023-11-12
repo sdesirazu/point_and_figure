@@ -42,14 +42,13 @@ sheet = sheet.sheet1 #replace sheet_name with the name that corresponds to yours
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
 col = sheet.col_values(1)
-print(col)
 
+column_number = 1
+row_number = 1
 for cell in col:
-    print(cell.value)
-    ticker = cell.value
+    ticker = cell
     model = PointAndFigure(step, ticker, startDate)
-    row_number = cell.row
-    column_number = cell.col
     write_column_number = column_number + 1
     sheet.update_cell(row_number, write_column_number, model)
+    row_number = row_number + 1
 
