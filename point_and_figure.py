@@ -167,6 +167,7 @@ class PointAndFigure:
                 chart += grid[i][j]
             chart += "\n"
         
+        print("Nikhil")
         print(self.ticker+"="+grid[row][col])
 
-        return grid[row][col]
+        return ""+grid[row][col]

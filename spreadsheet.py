@@ -49,6 +49,7 @@ row_number = 1
 for cell in col:
     ticker = cell
     model = PointAndFigure(step, ticker, startDate)
+    print("model is "+model)
     write_column_number = column_number + 1
     sheet.update_cell(row_number, write_column_number, model)
     row_number = row_number + 1
