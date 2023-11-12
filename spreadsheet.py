@@ -29,9 +29,13 @@ credentials = service_account.Credentials.from_service_account_info(
 
 scoped_credentials = credentials.with_scopes(scopes)
 
+print("srinivas")
+
 file = gspread.authorize(scoped_credentials) # authenticate the JSON key with gspread
 
 sheet = file.open("pnf") #open sheet
+
+print("desirazu")
 
 sheet = sheet.Sheet1 #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 
