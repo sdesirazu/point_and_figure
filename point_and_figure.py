@@ -44,7 +44,6 @@ class PointAndFigure:
 
     def chart(self):
 
-        print(self.startDate)
         hist = self.instrument.history(start=self.startDate, end=self.endDate)
         df = pd.DataFrame({'Date':hist['Close'].index, 'Close': hist['Close'].values})
 
@@ -168,9 +167,13 @@ class PointAndFigure:
                 chart += grid[i][j]
             chart += "\n"
         
+        print ("width")
         print(width)
+        print ("height")
         print(height)
+        print ("grid height minus one ")
         print(grid[height-1][width-1])
+        print ("grid height ")
         print(grid[height][width])
 
         return chart
