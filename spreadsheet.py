@@ -48,9 +48,11 @@ column_number = 1
 row_number = 1
 for cell in col:
     ticker = cell
+    print(ticker)
     model = PointAndFigure(step, ticker, startDate)
-    print("model is "+model)
+    xoro = model.chart()
+    print("model is "+xoro)
     write_column_number = column_number + 1
-    sheet.update_cell(row_number, write_column_number, model)
+    sheet.update_cell(row_number, write_column_number, xoro)
     row_number = row_number + 1
 
