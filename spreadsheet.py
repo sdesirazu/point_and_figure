@@ -1,7 +1,7 @@
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 import json
 import sys
+from google.oauth2 import service_account
 
 try:
     startDate = sys.argv[1]
@@ -26,8 +26,11 @@ credentials = service_account.Credentials.from_service_account_info(
     service_account_info)
 
 scoped_credentials = credentials.with_scopes(scopes)
+
 file = gspread.authorize(scoped_credentials) # authenticate the JSON key with gspread
+
 sheet = file.open("pnf") #open sheet
+
 sheet = sheet.Sheet1 #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 
 # for each cell in the sheet call the point and figure and write it back to the sheet
@@ -42,5 +45,5 @@ for cell in col:
     row_number = cell.row
     column_number = cell.col
     write_column_number = column_number + 1
-    sheet.update_cell(row_number, write_column_number, $model)
+    sheet.update_cell(row_number, write_column_number, model)
 
