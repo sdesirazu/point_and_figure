@@ -169,4 +169,4 @@ class PointAndFigure:
         
         print(self.ticker+"="+grid[row][col])
 
-        return chart
+        return grid[row][col]

@@ -28,14 +28,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         pip install pandas yfinance
-        python main.py MSFT 3 2023-01-01
-        python main.py AMZN 3 2023-01-01
-        python main.py TEAM 3 2023-01-01
-        python main.py FSLR 3 2023-01-01
+        pip install gspread oauth2client
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: run application
       run: |
-        python main.py MSFT 3 2023-01-01
+        python spreadsheet.py 3 2023-01-01
+      env:
+        TOKEN: ${{ secrets.RANDOM_SECRET}} 
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
