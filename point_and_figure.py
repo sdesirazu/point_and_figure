@@ -167,18 +167,6 @@ class PointAndFigure:
                 chart += grid[i][j]
             chart += "\n"
         
-        print ("width")
-        print(width)
-        print ("height")
-        print(height)
-        print ("row")
-        print(row)
-        print ("col")
-        print(col)
-        print ("grid row col ")
-        print(grid[row][col])
-        print ("grid height minus one ")
-        print(grid[height-1][width-1])
-        print ("grid height ")
+        print(self.ticker+"="+grid[row][col])
 
         return chart
