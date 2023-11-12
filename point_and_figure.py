@@ -171,6 +171,6 @@ class PointAndFigure:
         print(width)
         print(height)
         print(grid[height-1][width-1)
-        print(grid[height][width)
+        print(grid[height][width])
 
         return chart
