@@ -3,9 +3,10 @@ import pandas as pd
 import math
 
 class PointAndFigure:
-    def __init__(self, step, ticker, startDate, endDate=None):
+    def __init__(self, step, ticker, returnChart, startDate, endDate=None):
         self.step = step
         self.ticker = ticker
+        self.returnChart = returnChart
         self.startDate = startDate
         self.endDate = None
         self.instrument = yf.Ticker(ticker)
@@ -167,7 +168,8 @@ class PointAndFigure:
                 chart += grid[i][j]
             chart += "\n"
         
-        print("Nikhil")
-        print(self.ticker+"="+grid[row][col])
+        if returnChart == 1:
+            return chart
 
+        
         return ""+grid[row][col]

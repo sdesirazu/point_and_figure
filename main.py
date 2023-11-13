@@ -15,7 +15,7 @@ def main():
     except:
         print("invalid or missing start date")
     try:
-        model = PointAndFigure(step, ticker, startDate)
+        model = PointAndFigure(step, ticker, 1, startDate)
         print(model.chart())
     except:
         print("failed to create the chart")

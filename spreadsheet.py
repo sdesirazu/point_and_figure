@@ -49,7 +49,7 @@ row_number = 1
 for cell in col:
     ticker = cell
     print(ticker)
-    model = PointAndFigure(step, ticker, startDate)
+    model = PointAndFigure(step, ticker, 0, startDate)
     xoro = model.chart()
     print("model is "+xoro)
     write_column_number = column_number + 1
