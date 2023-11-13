@@ -58,6 +58,6 @@ for cell in col:
 
     # datetime object containing current date and time
     now = datetime.now()
-    sheet.update_cell(row_number, write_column_number+1, now)
+    sheet.update_cell(row_number, write_column_number+1, now.strftime("%c"))
     row_number = row_number + 1
 
