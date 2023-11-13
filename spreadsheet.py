@@ -4,6 +4,7 @@ import os
 import sys
 from google.oauth2 import service_account
 from point_and_figure import PointAndFigure 
+from datetime import datetime
 
 try:
     step = float(sys.argv[1])
@@ -54,5 +55,9 @@ for cell in col:
     print("model is "+xoro)
     write_column_number = column_number + 1
     sheet.update_cell(row_number, write_column_number, xoro)
+
+    # datetime object containing current date and time
+    now = datetime.now()
+    sheet.update_cell(row_number, write_column_number+1, now)
     row_number = row_number + 1
 

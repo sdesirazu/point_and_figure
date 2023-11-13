@@ -171,5 +171,4 @@ class PointAndFigure:
         if returnChart == 1:
             return chart
 
-        
         return ""+grid[row][col]
