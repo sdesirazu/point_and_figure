@@ -168,7 +168,7 @@ class PointAndFigure:
                 chart += grid[i][j]
             chart += "\n"
         
-        if returnChart == 1:
+        if self.returnChart == 1:
             return chart
 
         return ""+grid[row][col]
