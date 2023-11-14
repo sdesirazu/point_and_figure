@@ -76,7 +76,7 @@ for ticker in col:
         print("Failed on ticker")
 
         
-    location = "'C"+init_row_number+":D"+row_number+"'"
+    location = "'C"+str(init_row_number)+":D"+str(row_number)+"'"
     print(location)
     sheet.update_cell(location, grid)
     
