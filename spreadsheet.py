@@ -41,15 +41,20 @@ sheet = file.open("231113-Wkly Options")
 print("desirazu")
 
 #sheet = sheet.sheet1 #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
-sheet = sheet.'stock list' #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+sheet = sheet.worksheet("stock list") #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
-col = sheet.col_values(1)
+col = sheet.col_values(2)
 
-column_number = 2
+start = 1
+column_number = 3
 row_number = 4
 for cell in col:
+    # start with column 4
+    if start < row_number:
+        start = start + 1
+        continue
     ticker = cell
     print(ticker)
     try:
