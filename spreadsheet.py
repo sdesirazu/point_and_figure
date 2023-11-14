@@ -45,17 +45,16 @@ sheet = sheet.worksheet("Stock List") #replace sheet_name with the name that cor
 
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
-col = sheet.col_values(2)
+column_number = 2
+col = sheet.col_values(column_number)
 
 start = 1
-column_number = 3
 row_number = 4
-for cell in col:
+for ticker in col:
     # start with column 4
     if start < row_number:
         start = start + 1
         continue
-    ticker = cell
     print(ticker)
     try:
         model = PointAndFigure(step, ticker, 0, startDate)
