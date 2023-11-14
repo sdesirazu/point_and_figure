@@ -48,10 +48,6 @@ sheet = sheet.worksheet("Stock List") #replace sheet_name with the name that cor
 column_number = 2
 col = sheet.col_values(column_number)
 
-height = 4
-width = 1000
-grid = [[' ' for _ in range(width)] for _ in range(height)]
-
 start = 1
 row_number = 4
 init_row_number = row_number
@@ -66,12 +62,16 @@ for ticker in col:
         xoro = model.chart()
         # datetime object containing current date and time
         now = datetime.now()
+        li[0]=ticker
+        li[1]=xoro
+        li[2]=now
+        grid[row_number] = li
         row_number = row_number + 1
     except:
         print("Failed on ticker")
 
         
-    location = "'C"+str(init_row_number)+":D"+str(row_number)+"'"
-    print(location)
-    #sheet.update_cell(location, grid)
+location = "'C"+str(init_row_number)+":D"+str(row_number)+"'"
+print(location)
+sheet.update_cell(location, grid)
     
