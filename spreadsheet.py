@@ -48,7 +48,7 @@ sheet = sheet.worksheet("Stock List") #replace sheet_name with the name that cor
 column_number = 2
 col = sheet.col_values(column_number)
 
-height = 3
+height = 4
 width = 1000
 grid = [[' ' for _ in range(width)] for _ in range(height)]
 
@@ -78,5 +78,5 @@ for ticker in col:
         
     location = "'C"+str(init_row_number)+":D"+str(row_number)+"'"
     print(location)
-    sheet.update_cell(location, grid)
+    #sheet.update_cell(location, grid)
     
