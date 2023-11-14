@@ -53,7 +53,7 @@ width = 1000
 grid = [[' ' for _ in range(width)] for _ in range(height)]
 
 start = 1
-init_row_number = 4
+row_number = 4
 init_row_number = row_number
 for ticker in col:
     # start with column 4
