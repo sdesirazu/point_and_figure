@@ -36,8 +36,8 @@ print("srinivas")
 
 file = gspread.authorize(scoped_credentials) # authenticate the JSON key with gspread
 
-sheet = file.open("pnf") #open sheet
-
+#####sheet = file.open("pnf") #open sheet
+sheet = file.open("231113-Wkly Options")
 print("desirazu")
 
 sheet = sheet.sheet1 #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
@@ -46,20 +46,23 @@ sheet = sheet.sheet1 #replace sheet_name with the name that corresponds to yours
 
 col = sheet.col_values(1)
 
-column_number = 1
-row_number = 1
+column_number = 2
+row_number = 4
 for cell in col:
     ticker = cell
     print(ticker)
-    model = PointAndFigure(step, ticker, 0, startDate)
-    xoro = model.chart()
-    print("model is "+xoro)
-    write_column_number = column_number + 1
-    sheet.update_cell(row_number, write_column_number, xoro)
+    try:
+        model = PointAndFigure(step, ticker, 0, startDate)
+        xoro = model.chart()
+        print("model is "+xoro)
+        write_column_number = column_number + 1
+        sheet.update_cell(row_number, write_column_number, xoro)
 
-    # datetime object containing current date and time
-    now = datetime.now()
-    sheet.update_cell(row_number, write_column_number+1, now.strftime("%c"))
-    row_number = row_number + 1
-    time.sleep(2)
+        # datetime object containing current date and time
+        now = datetime.now()
+        sheet.update_cell(row_number, write_column_number+1, now.strftime("%c"))
+        row_number = row_number + 1
+        time.sleep(2)
+    except:
+        print("Failed on ticker")
 
