@@ -48,8 +48,13 @@ sheet = sheet.worksheet("Stock List") #replace sheet_name with the name that cor
 column_number = 2
 col = sheet.col_values(column_number)
 
+height = 3
+width = 1000
+grid = [[' ' for _ in range(width)] for _ in range(height)]
+
 start = 1
-row_number = 4
+init_row_number = 4
+init_row_number = row_number
 for ticker in col:
     # start with column 4
     if start < row_number:
@@ -59,15 +64,19 @@ for ticker in col:
     try:
         model = PointAndFigure(step, ticker, 0, startDate)
         xoro = model.chart()
-        print("model is "+xoro)
-        write_column_number = column_number + 1
-        sheet.update_cell(row_number, write_column_number, xoro)
-
         # datetime object containing current date and time
         now = datetime.now()
-        sheet.update_cell(row_number, write_column_number+1, now.strftime("%c"))
+
+        grid[row_number][0] = ticker
+        grid[row_number][1] = xoro
+        grid[row_number][2] = now
         row_number = row_number + 1
         time.sleep(2)
     except:
         print("Failed on ticker")
 
+        
+    location = "'C"+init_row_number+":D"+row_number+"'"
+    print(location)
+    sheet.update_cell(location, grid)
+    
