@@ -66,12 +66,7 @@ for ticker in col:
         xoro = model.chart()
         # datetime object containing current date and time
         now = datetime.now()
-
-        grid[row_number][0] = ticker
-        grid[row_number][1] = xoro
-        grid[row_number][2] = now
         row_number = row_number + 1
-        time.sleep(2)
     except:
         print("Failed on ticker")
 
