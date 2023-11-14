@@ -51,6 +51,7 @@ col = sheet.col_values(column_number)
 start = 1
 row_number = 4
 init_row_number = row_number
+grid = []
 for ticker in col:
     # start with column 4
     if start < row_number:
@@ -58,6 +59,7 @@ for ticker in col:
         continue
     print(ticker)
     try:
+        li = []
         model = PointAndFigure(step, ticker, 0, startDate)
         xoro = model.chart()
         # datetime object containing current date and time
