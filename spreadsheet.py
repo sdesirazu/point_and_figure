@@ -40,7 +40,8 @@ file = gspread.authorize(scoped_credentials) # authenticate the JSON key with gs
 sheet = file.open("231113-Wkly Options")
 print("desirazu")
 
-sheet = sheet.sheet1 #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+#sheet = sheet.sheet1 #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+sheet = sheet.'stock list' #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
