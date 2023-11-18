@@ -49,7 +49,7 @@ column_number = 2
 col = sheet.col_values(column_number)
 
 start = 1
-row_number = 4
+row_number = 2
 init_row_number = row_number
 grid = []
 for ticker in col:
