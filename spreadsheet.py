@@ -41,7 +41,7 @@ sheet = file.open("231113-Wkly Options")
 print("desirazu")
 
 #sheet = sheet.sheet1 #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
-sheet = sheet.worksheet("Stock List") #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+sheet = sheet.worksheet("P&F") #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
@@ -73,7 +73,8 @@ for ticker in col:
         print("Failed on ticker")
 
         
-location = "'C"+str(init_row_number)+":D"+str(row_number)+"'"
+location = "'K"+str(init_row_number)+":L"+str(row_number)+"'"
 print(location)
+print(grid)
 sheet.update_cell(location, grid)
     
