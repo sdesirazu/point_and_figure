@@ -64,16 +64,17 @@ for ticker in col:
         xoro = model.chart()
         # datetime object containing current date and time
         now = datetime.now()
+        dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
         li.append(ticker)
         li.append(xoro)
-        li.append(now)
+        li.append(dt_string)
         grid.append(li)
         row_number = row_number + 1
     except:
         print("Failed on ticker")
 
         
-location = "'K"+str(init_row_number)+":L"+str(row_number)+"'"
+location = "'K"+str(init_row_number)+":M"+str(row_number)+"'"
 print(location)
 print(grid)
 sheet.batch_update([{
