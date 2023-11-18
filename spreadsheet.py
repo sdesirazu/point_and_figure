@@ -77,8 +77,5 @@ for ticker in col:
 location = "'K"+str(init_row_number)+":M"+str(row_number)+"'"
 print(location)
 print(grid)
-sheet.batch_update([{
-    'range': location,
-    'values': grid,
-}])
+sheet.update_cell('range': location, 'value': grid)
     
