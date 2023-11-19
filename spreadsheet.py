@@ -47,7 +47,7 @@ sheet = sheet.worksheet("P&F") #replace sheet_name with the name that correspond
 
 column_number = 2
 col = sheet.col_values(column_number)
-
+print(col)
 start = 1
 row_number = 2
 init_row_number = row_number
@@ -57,7 +57,6 @@ for ticker in col:
     if start < row_number:
         start = start + 1
         continue
-    print(ticker)
     try:
         li = []
         model = PointAndFigure(step, ticker, 0, startDate)
