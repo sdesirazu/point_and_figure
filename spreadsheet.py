@@ -57,20 +57,20 @@ for ticker in col:
     if start < row_number:
         start = start + 1
         continue
+    li = []
+    li.append(ticker)
+    # datetime object containing current date and time
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    li.append(dt_string)
     try:
-        li = []
         model = PointAndFigure(step, ticker, 0, startDate)
         xoro = model.chart()
-        # datetime object containing current date and time
-        now = datetime.now()
-        dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-        li.append(ticker)
         li.append(xoro)
-        li.append(dt_string)
         grid.append(li)
         row_number = row_number + 1
     except:
-        print("Failed on ticker")
+        print("Failed on ticker"+ticker)
 
         
 location = "K"+str(init_row_number)+":M"+str(row_number)+""
