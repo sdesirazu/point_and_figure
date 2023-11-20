@@ -171,10 +171,13 @@ class PointAndFigure:
         if self.returnChart == 1:
             return chart
 
-        # In the last column I need the earliest row with a value
-        print(chart)
-
+        print("printing debug values")
         for i in row:
             print(grid[i][col])
+
+        print("finished printing debug values")
+
+        # In the last column I need the earliest row with a value
+        print(chart)
 
         return ""+grid[row][col]
