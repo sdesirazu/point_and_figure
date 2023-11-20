@@ -67,11 +67,11 @@ for ticker in col:
         model = PointAndFigure(step, ticker, 0, startDate)
         xoro = model.chart()
         li.append(xoro)
-        grid.append(li)
         row_number = row_number + 1
     except:
         print("Failed on ticker"+ticker)
 
+    grid.append(li)
         
 location = "K"+str(init_row_number)+":M"+str(row_number)+""
 print("BEFORE LOCATION")
