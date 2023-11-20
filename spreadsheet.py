@@ -32,13 +32,11 @@ credentials = service_account.Credentials.from_service_account_info(
 
 scoped_credentials = credentials.with_scopes(scopes)
 
-print("srinivas")
 
 file = gspread.authorize(scoped_credentials) # authenticate the JSON key with gspread
 
 #####sheet = file.open("pnf") #open sheet
 sheet = file.open("231113-Wkly Options")
-print("desirazu")
 
 #sheet = sheet.sheet1 #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 sheet = sheet.worksheet("P&F") #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
@@ -47,12 +45,13 @@ sheet = sheet.worksheet("P&F") #replace sheet_name with the name that correspond
 
 column_number = 2
 col = sheet.col_values(column_number)
-print(col)
 start = 2
 row_number = start
 init_row_number = row_number
 grid = []
 for ticker in col:
+    if ticker == "Ticker":
+        continue
     li = []
     li.append(ticker)
     # datetime object containing current date and time
@@ -70,13 +69,6 @@ for ticker in col:
     grid.append(li)
         
 location = "K"+str(init_row_number)+":M"+str(row_number)+""
-print("BEFORE LOCATION")
-print(location)
-print(grid)
-#sheet.update({
-#    'range_name': location,
-#    'values': grid,
-#})
     
 sheet.batch_update([{
     'range': location,

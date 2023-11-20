@@ -171,4 +171,5 @@ class PointAndFigure:
         if self.returnChart == 1:
             return chart
 
+        print(chart)
         return ""+grid[row][col]
