@@ -48,15 +48,11 @@ sheet = sheet.worksheet("P&F") #replace sheet_name with the name that correspond
 column_number = 2
 col = sheet.col_values(column_number)
 print(col)
-start = 1
-row_number = 2
+start = 2
+row_number = start
 init_row_number = row_number
 grid = []
 for ticker in col:
-    # start with column 4
-    if start < row_number:
-        start = start + 1
-        continue
     li = []
     li.append(ticker)
     # datetime object containing current date and time
