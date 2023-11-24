@@ -21,6 +21,6 @@ ts = ts.to_dict('list')
 
 pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=2, scaling='abs', title='AAPL')
 print(pnf.matrix)
-print(pnf_timeseries['box index'])
+print(pnf.pnf_timeseries['box index'])
 pnf.get_trendlines()
 print(pnf)
