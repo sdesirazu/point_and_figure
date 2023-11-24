@@ -104,7 +104,8 @@ for ticker in col:
         # convert DataFrame to dictionary
         ts = ts.to_dict('list')
         
-        
+        print(box)
+        print(step)
         pnf = PointFigureChart(ts=ts, method='h/l', reversal=step, boxsize=box, scaling='abs', title=ticker)
         y = pnf.matrix.shape[1] - 1
         for x in pnf.matrix:
@@ -115,6 +116,7 @@ for ticker in col:
                     xoro = 'O'
                 li.append(xoro)
                 break
+        print("done with matrix")
     except:
         print("Failed on ticker"+ticker)
 
