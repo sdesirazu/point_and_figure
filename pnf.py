@@ -21,15 +21,11 @@ ts = ts.to_dict('list')
 
 pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=2, scaling='abs', title='AAPL')
 pnf.get_trendlines()
-print(pnf)
-print(pnf.matrix.shape)
-print (pnf.matrix.shape[1])
 y = pnf.matrix.shape[1] - 1
-print(y)
 for x in pnf.matrix:
-    print(x[y])
+    print(x)
     
-    if x[y] == 'X' or x[y] == 'O':
+    if x[y] == 1 or x[y] == -1:
         print("Srinivas")
         print(x[y])
         break
