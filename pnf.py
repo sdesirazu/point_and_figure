@@ -18,8 +18,31 @@ ts = ts[['Date','Open','High','Low','Close']]
 # convert DataFrame to dictionary
 ts = ts.to_dict('list')
 
+if price < 0.25:
+    box = 0.0625
+else if price >= 0.25 and price < 1.00:
+    box = 0.125
+else if price >= 1.00 and price < 5.00:
+    box = 0.25
+else if price >= 5.00 and price < 20.00:
+    box = 0.50
+else if price >= 20.00 and price < 100:
+    box = 1.00
+else if price >= 100 and price < 200:
+    box = 2.00
+else if price >= 200 and price < 500:
+    box = 4.00
+else if price >= 500 and price < 1,000:
+    box = 5.00
+else if price >= 1,000 and price < 2,500:
+    box = 10.00
+else if price >= 2,500 and price < 25,000:
+    box = 50.00
+else:
+    500.00
 
-pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=2, scaling='abs', title='AAPL')
+pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=box, scaling='abs', title='AAPL')
+print(pnf)
 pnf.get_trendlines()
 y = pnf.matrix.shape[1] - 1
 for x in pnf.matrix:

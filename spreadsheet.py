@@ -41,6 +41,8 @@ sheet = file.open("231113-Wkly Options")
 #sheet = sheet.sheet1 #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 sheet = sheet.worksheet("P&F") #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 
+
+
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
 column_number = 2
@@ -48,6 +50,8 @@ col = sheet.col_values(column_number)
 start = 2
 row_number = start
 init_row_number = row_number
+
+
 grid = []
 for ticker in col:
     if ticker == "Ticker":
@@ -59,9 +63,57 @@ for ticker in col:
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     li.append(dt_string)
     try:
-        model = PointAndFigure(step, ticker, 0, startDate)
-        xoro = model.chart()
-        li.append(xoro)
+        data = yf.Ticker(ticker)
+        price = data.info['currentPrice']
+
+        if price < 0.25:
+            box = 0.0625
+        else if price >= 0.25 and price < 1.00:
+            box = 0.125
+        else if price >= 1.00 and price < 5.00:
+            box = 0.25
+        else if price >= 5.00 and price < 20.00:
+            box = 0.50
+        else if price >= 20.00 and price < 100:
+            box = 1.00
+        else if price >= 100 and price < 200:
+            box = 2.00
+        else if price >= 200 and price < 500:
+            box = 4.00
+        else if price >= 500 and price < 1,000:
+            box = 5.00
+        else if price >= 1,000 and price < 2,500:
+            box = 10.00
+        else if price >= 2,500 and price < 25,000:
+            box = 50.00
+        else:
+            box = 500.00
+
+        ts = data.history(start=startDate, end=None)
+        
+        # reset index
+        ts.reset_index(level=0, inplace=True)
+        
+        # convert pd.timestamp to string
+        ts['Date'] = ts['Date'].dt.strftime('%Y-%m-%d')
+        
+        # select required keys
+        ts = ts[['Date','Open','High','Low','Close']]
+    
+        # convert DataFrame to dictionary
+        ts = ts.to_dict('list')
+        
+        
+        pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=box, scaling='abs', title=ticker)
+        y = pnf.matrix.shape[1] - 1
+        for x in pnf.matrix:
+            if x[y] == 1 or x[y] == -1:
+                if x[y] == 1:
+                    xoro = 'X'
+                else:
+                    xoro = 'O'
+                li.append(xoro)
+                break
     except:
         print("Failed on ticker"+ticker)
 
