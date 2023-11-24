@@ -12,7 +12,7 @@ df = pd.DataFrame({'Date':hist['Close'].index, 'Open': hist['Open'].values, 'Hig
 
 
 cv = {}
-mpf.plot(df,type=pnf,return_calculated_values=cv)
+mpf.plot(df,type='pnf',return_calculated_values=cv)
 
 print("srinvias")
 print(cv['pnf_counts'])
