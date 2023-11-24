@@ -18,6 +18,8 @@ ts = ts[['Date','Open','High','Low','Close']]
 # convert DataFrame to dictionary
 ts = ts.to_dict('list')
 
+price = data.info['currentPrice']
+
 if price < 0.25:
     box = 0.0625
 else if price >= 0.25 and price < 1.00:
