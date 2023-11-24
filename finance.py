@@ -10,6 +10,11 @@ endDate = None
 hist = instrument.history(start=startDate, end=endDate)
 df = pd.DataFrame({'Date':hist['Close'].index, 'Open': hist['Open'].values, 'High': hist['High'].values, 'Low': hist['Low'].values, 'Close': hist['Close'].values, 'Volume': hist['Volume'].values})
 
+close_prices = df['Close']
+dates = df['Date']
+
+print(close_prices)
+print(dates)
 
 cv = {}
 mpf.plot(df,type='pnf',return_calculated_values=cv)
