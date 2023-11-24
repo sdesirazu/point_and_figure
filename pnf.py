@@ -20,6 +20,6 @@ ts = ts.to_dict('list')
 
 
 pnf = PointFigureChart(ts=ts, method='cl', reversal=3, boxsize=2, scaling='abs', title='AAPL')
-print(pnf.keys())
+print(pnf.matrix)
 pnf.get_trendlines()
 print(pnf)
