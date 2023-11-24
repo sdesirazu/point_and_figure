@@ -171,10 +171,11 @@ class PointAndFigure:
         if self.returnChart == 1:
             return chart
 
-        print("printing debug values "+col)
-        for i in range(row):
-            print(i)
-            print(grid[i][col])
+        print("printing debug values col = "+col)
+        print("printing debug values row = "+row)
+        #for i in range(row):
+        #print(i)
+        #print(grid[i][col])
 
         print("finished printing debug values")
 
