@@ -8,12 +8,13 @@ startDate = "2023-01-01"
 endDate = None
 
 hist = instrument.history(start=startDate, end=endDate)
-df = pd.DataFrame({'Date':hist['Close'].index, 'Close': hist['Close'].values})
+df = pd.DataFrame({'Date':hist['Close'].index, 'Open': hist['Open'].values, 'High': hist['High'].values, 'Low': hist['Low'].values, 'Close': hist['Close'].values, 'Volume': hist['Volume'].values})
 
 
-close_prices = df['Close']
-dates = df['Date']
+cv = {}
+mpf.plot(df,type=pnf,return_calculated_values=cv)
 
-print(close_prices)
-print(dates)
-
+print("srinvias")
+print(cv['pnf_counts'])
+print(cv['pnf_values'])
+print("desirazu")
