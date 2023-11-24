@@ -26,7 +26,7 @@ print(pnf.matrix.shape)
 print (pnf.matrix.shape[1])
 y = pnf.matrix.shape[1] - 1
 for x in matrix:
-  if x[y] == 'X' || x[y] == 'O':
+  if x[y] == 'X' or x[y] == 'O':
     print(x[y])
     break
 
