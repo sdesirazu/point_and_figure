@@ -25,8 +25,12 @@ print(pnf)
 print(pnf.matrix.shape)
 print (pnf.matrix.shape[1])
 y = pnf.matrix.shape[1] - 1
+print(y)
 for x in pnf.matrix:
-  if x[y] == 'X' or x[y] == 'O':
     print(x[y])
-    break
-
+    
+    if x[y] == 'X' or x[y] == 'O':
+        print("Srinivas")
+        print(x[y])
+        break
+    
