@@ -16,6 +16,5 @@ cv = {}
 mpf.plot(df,type='pnf',return_calculated_values=cv)
 
 print("srinvias")
-print(cv['pnf_counts'])
-print(cv['pnf_values'])
+print(cv)
 print("desirazu")
