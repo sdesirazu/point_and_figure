@@ -4,7 +4,7 @@ from pypnf import PointFigureChart
 symbol = 'AAPL'
 
 data = yf.Ticker(symbol)
-ts = data.history(start='2018-01-01', end='2018-06-30')
+ts = data.history(start='2023-01-01', end=None)
 
 # reset index
 ts.reset_index(level=0, inplace=True)
