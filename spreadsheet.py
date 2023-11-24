@@ -4,8 +4,9 @@ import json
 import os
 import sys
 from google.oauth2 import service_account
-from point_and_figure import PointAndFigure 
 from datetime import datetime
+import yfinance as yf
+from pypnf import PointFigureChart
 
 try:
     step = float(sys.argv[1])
@@ -104,7 +105,7 @@ for ticker in col:
         ts = ts.to_dict('list')
         
         
-        pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=box, scaling='abs', title=ticker)
+        pnf = PointFigureChart(ts=ts, method='h/l', reversal=step, boxsize=box, scaling='abs', title=ticker)
         y = pnf.matrix.shape[1] - 1
         for x in pnf.matrix:
             if x[y] == 1 or x[y] == -1:
