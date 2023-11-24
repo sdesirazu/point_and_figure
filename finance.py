@@ -10,8 +10,8 @@ endDate = None
 #hist = instrument.history(start=startDate, end=endDate)
 #df = pd.DataFrame({'Date':hist['Close'].index, 'Open': hist['Open'].values, 'High': hist['High'].values, 'Low': hist['Low'].values, 'Close': hist['Close'].values, 'Volume': hist['Volume'].values})
 
-df = yf.download("MSFT", period='6mo')
-
+df = yf.download("MSFT", period='1mo')
+print(df)
 cv = {}
 mpf.plot(df,type='pnf',return_calculated_values=cv)
 
