@@ -31,10 +31,11 @@ jobs:
         pip install gspread
         pip install --upgrade google-auth
         pip install --upgrade mplfinance
+        pip install pypnf
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: run application
       run: |
-        python finance.py
+        python pnf.py
       env:
         TOKEN: ${{ secrets.RANDOM_SECRET}} 
     - name: Lint with flake8
