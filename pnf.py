@@ -34,11 +34,11 @@ elif price >= 100 and price < 200:
     box = 2.00
 elif price >= 200 and price < 500:
     box = 4.00
-elif price >= 500 and price < 1,000:
+elif price >= 500 and price < 1000:
     box = 5.00
-elif price >= 1,000 and price < 2,500:
+elif price >= 1000 and price < 2500:
     box = 10.00
-elif price >= 2,500 and price < 25,000:
+elif price >= 2500 and price < 25000:
     box = 50.00
 else:
     box = 500.00
