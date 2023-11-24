@@ -11,11 +11,6 @@ endDate = None
 #df = pd.DataFrame({'Date':hist['Close'].index, 'Open': hist['Open'].values, 'High': hist['High'].values, 'Low': hist['Low'].values, 'Close': hist['Close'].values, 'Volume': hist['Volume'].values})
 
 df = yf.download("MSFT", period='6mo')
-close_prices = df['Close']
-dates = df['Date']
-
-print(close_prices)
-print(dates)
 
 cv = {}
 mpf.plot(df,type='pnf',return_calculated_values=cv)
