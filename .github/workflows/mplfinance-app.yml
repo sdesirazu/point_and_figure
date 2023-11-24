@@ -34,7 +34,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: run application
       run: |
-        python mplfinance.py
+        python finance.py
       env:
         TOKEN: ${{ secrets.RANDOM_SECRET}} 
     - name: Lint with flake8
