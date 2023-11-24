@@ -4,8 +4,10 @@ import math
 import mplfinance as mpf
 
 instrument = yf.Ticker("MSFT")
+startDate = "2023-01-01"
+endDate = None
 
-hist = instrument.history(start=self.startDate, end=self.endDate)
+hist = instrument.history(start=startDate, end=endDate)
 df = pd.DataFrame({'Date':hist['Close'].index, 'Close': hist['Close'].values})
 
 
