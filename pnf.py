@@ -22,8 +22,11 @@ ts = ts.to_dict('list')
 pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=2, scaling='abs', title='AAPL')
 pnf.get_trendlines()
 print(pnf)
-print(pnf.pnf_timeseries['box value'])
-print(pnf.pnf_timeseries['box index'])
-print(pnf.pnf_timeseries['column index'])
-print(pnf.pnf_timeseries['filled boxes'])
-print(pnf.matrix)
+print(pnf.matrix.shape)
+print (pnf.matrix.shape[1])
+y = pnf.matrix.shape[1] - 1
+for x in matrix:
+  if x[y] == 'X' || x[y] == 'O':
+    print(x[y])
+    break
+
