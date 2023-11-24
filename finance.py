@@ -16,5 +16,5 @@ cv = {}
 mpf.plot(df,type='pnf',return_calculated_values=cv)
 
 print("srinvias")
-print(cv['pnf_bricks'])
+print(cv.keys())
 print("desirazu")
