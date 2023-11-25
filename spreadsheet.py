@@ -102,7 +102,6 @@ for ticker in col:
         pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=box, scaling='abs', title=ticker)
         y = pnf.matrix.shape[1] - 1
         for x in pnf.matrix:
-            print(x[y])
             if x[y] == 1 or x[y] == -1:
                 if x[y] == 1:
                     xoro = 'X'
