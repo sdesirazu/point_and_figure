@@ -36,7 +36,7 @@ scoped_credentials = credentials.with_scopes(scopes)
 
 file = gspread.authorize(scoped_credentials) # authenticate the JSON key with gspread
 
-sheet = file.open("231127-Wkly Options")
+sheet = file.open("P&F")
 
 sheet = sheet.worksheet("P&F") #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 
@@ -47,7 +47,6 @@ col = sheet.col_values(column_number)
 start = 2
 row_number = start
 init_row_number = row_number
-
 
 grid = []
 for ticker in col:
