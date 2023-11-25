@@ -104,11 +104,11 @@ for ticker in col:
         # convert DataFrame to dictionary
         ts = ts.to_dict('list')
         
-        print(box)
-        print(step)
         pnf = PointFigureChart(ts=ts, method='h/l', reversal=step, boxsize=box, scaling='abs', title=ticker)
         y = pnf.matrix.shape[1] - 1
+        print(y)
         for x in pnf.matrix:
+            print(x[y])
             if x[y] == 1 or x[y] == -1:
                 if x[y] == 1:
                     xoro = 'X'
