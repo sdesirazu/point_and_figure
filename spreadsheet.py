@@ -36,13 +36,9 @@ scoped_credentials = credentials.with_scopes(scopes)
 
 file = gspread.authorize(scoped_credentials) # authenticate the JSON key with gspread
 
-#####sheet = file.open("pnf") #open sheet
-sheet = file.open("231113-Wkly Options")
+sheet = file.open("231127-Wkly Options")
 
-#sheet = sheet.sheet1 #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 sheet = sheet.worksheet("P&F") #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
-
-
 
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
@@ -106,7 +102,6 @@ for ticker in col:
         
         pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=box, scaling='abs', title=ticker)
         y = pnf.matrix.shape[1] - 1
-        print(y)
         for x in pnf.matrix:
             print(x[y])
             if x[y] == 1 or x[y] == -1:
@@ -116,7 +111,6 @@ for ticker in col:
                     xoro = 'O'
                 li.append(xoro)
                 break
-        print("done with matrix")
     except:
         print("Failed on ticker"+ticker)
 
