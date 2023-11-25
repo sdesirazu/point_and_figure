@@ -45,6 +45,7 @@ else:
 
 pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=box, scaling='abs', title='AAPL')
 print(pnf)
+print(pnf.matrix)
 pnf.get_trendlines()
 y = pnf.matrix.shape[1] - 1
 for x in pnf.matrix:
