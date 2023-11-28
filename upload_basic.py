@@ -12,6 +12,7 @@ def upload_basic(creds, saved_filename):
   TODO(developer) - See https://developers.google.com/identity
   for guides on implementing OAuth2 for the application.
   creds, _ = google.auth.default()
+  print(f'File ID: {file.get("id")}')
   """
 
   try:
@@ -26,12 +27,12 @@ def upload_basic(creds, saved_filename):
         .create(body=file_metadata, media_body=media, fields="id", supportsAllDrives=True)
         .execute()
     )
-    print(f'File ID: {file.get("id")}')
 
     anyone_permission = {
       'type': 'anyone',
       'role': 'reader'
     }
+
     service.permissions().create(
         fileId=file.get("id"),
         body=anyone_permission

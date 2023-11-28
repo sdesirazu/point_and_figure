@@ -102,7 +102,7 @@ for ticker in col:
         pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=box, scaling='abs', title=ticker)
         saved_filename = ticker +".png"
         pnf.save(saved_filename)
-        upload_basic.upload_basic(scoped_credentials, saved_filename)
+        file_id = upload_basic.upload_basic(scoped_credentials, saved_filename)
         y = pnf.matrix.shape[1] - 1
         for x in pnf.matrix:
             if x[y] == 1 or x[y] == -1:
@@ -110,6 +110,7 @@ for ticker in col:
                     xoro = 'X'
                 else:
                     xoro = 'O'
+                li.append("https://drive.google.com/file/d/"+file_id+"/view")
                 li.append(xoro)
                 break
     except:
@@ -118,7 +119,7 @@ for ticker in col:
     row_number = row_number + 1
     grid.append(li)
         
-location = "K"+str(init_row_number)+":M"+str(row_number)+""
+location = "K"+str(init_row_number)+":N"+str(row_number)+""
     
 sheet.batch_update([{
     'range': location,
