@@ -100,8 +100,9 @@ for ticker in col:
         ts = ts.to_dict('list')
         
         pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=box, scaling='abs', title=ticker)
-        pnf.save("download.jpeg")
-        upload_basic.upload_basic(scoped_credentials)
+        saved_filename = ticker +".png"
+        pnf.save(saved_filename)
+        upload_basic.upload_basic(scoped_credentials, saved_filename)
         y = pnf.matrix.shape[1] - 1
         for x in pnf.matrix:
             if x[y] == 1 or x[y] == -1:

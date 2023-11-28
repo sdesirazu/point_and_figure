@@ -4,7 +4,7 @@ from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
 
 
-def upload_basic(creds):
+def upload_basic(creds, saved_filename):
   """Insert new file.
   Returns : Id's of the file uploaded
 
@@ -18,8 +18,8 @@ def upload_basic(creds):
     # create drive api client
     service = build("drive", "v3", credentials=creds)
 
-    file_metadata = {"name": "download.jpeg"}
-    media = MediaFileUpload("download.jpeg", mimetype="image/jpeg")
+    file_metadata = {"name": saved_filename}
+    media = MediaFileUpload(saved_filename, mimetype="image/png")
     # pylint: disable=maybe-no-member
     file = (
         service.files()
