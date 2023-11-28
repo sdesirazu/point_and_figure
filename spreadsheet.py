@@ -7,7 +7,7 @@ from google.oauth2 import service_account
 from datetime import datetime
 import yfinance as yf
 from pypnf import PointFigureChart
-
+import upload_basic
 try:
     step = float(sys.argv[1])
 except:
@@ -101,7 +101,7 @@ for ticker in col:
         
         pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=box, scaling='abs', title=ticker)
         pnf.save("download.jpeg")
-        upload_basic(scoped_credentials)
+        upload_basic.upload_basic(scoped_credentials)
         y = pnf.matrix.shape[1] - 1
         for x in pnf.matrix:
             if x[y] == 1 or x[y] == -1:
