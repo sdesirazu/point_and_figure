@@ -23,26 +23,18 @@ def upload_basic(creds, saved_filename):
     # pylint: disable=maybe-no-member
     file = (
         service.files()
-        .create(body=file_metadata, media_body=media, fields="id")
+        .create(body=file_metadata, media_body=media, fields="id", supportsAllDrives=True)
         .execute()
     )
     print(f'File ID: {file.get("id")}')
 
-    # Call the Drive v3 API
-    results = (
-        service.files()
-        .list(pageSize=10, fields="nextPageToken, files(id, name)")
-        .execute()
-    )
-    items = results.get("files", [])
-
-    if not items:
-      print("No files found.")
-      return
-    print("Files:")
-    for item in items:
-      print(f"{item['name']} ({item['id']})")
-
+    anyone_permission = {
+      'type': 'anyone'
+    }
+    service.permissions().create(
+        fileId=file.get("id"),
+        body=anyone_permission
+    ).execute()
 
   except HttpError as error:
     print(f"An error occurred: {error}")
