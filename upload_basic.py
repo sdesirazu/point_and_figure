@@ -29,7 +29,8 @@ def upload_basic(creds, saved_filename):
     print(f'File ID: {file.get("id")}')
 
     anyone_permission = {
-      'type': 'anyone'
+      'type': 'anyone',
+      'role': 'reader'
     }
     service.permissions().create(
         fileId=file.get("id"),
