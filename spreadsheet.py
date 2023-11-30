@@ -103,6 +103,7 @@ for ticker in col:
         saved_filename = ticker +".png"
         pnf.save(saved_filename)
         file_id = upload_basic.upload_basic(scoped_credentials, saved_filename)
+        print(f'File ID: {file_id}')
         y = pnf.matrix.shape[1] - 1
         for x in pnf.matrix:
             if x[y] == 1 or x[y] == -1:
