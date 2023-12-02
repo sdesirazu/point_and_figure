@@ -37,13 +37,13 @@ file = gspread.authorize(scoped_credentials) # authenticate the JSON key with gs
 
 sheet = file.open("Weekly Options - Easy Income")
 
-sheet = sheet.worksheet("P&F") #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
+sheet = sheet.worksheet("Stock Analysis") #replace sheet_name with the name that corresponds to yours, e.g, it can be sheet1
 
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
 column_number = 2
 col = sheet.col_values(column_number)
-start = 2
+start = 5
 row_number = start
 init_row_number = row_number
 
@@ -52,11 +52,6 @@ for ticker in col:
     if ticker == "Ticker":
         continue
     li = []
-    li.append(ticker)
-    # datetime object containing current date and time
-    now = datetime.now()
-    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-    li.append(dt_string)
     try:
         data = yf.Ticker(ticker)
         price = data.info['currentPrice']
@@ -99,10 +94,6 @@ for ticker in col:
         ts = ts.to_dict('list')
         
         pnf = PointFigureChart(ts=ts, method='h/l', reversal=3, boxsize=box, scaling='abs', title=ticker)
-#        saved_filename = ticker +".png"
-#        pnf.save(saved_filename)
-#        file_id = upload_basic.upload_basic(scoped_credentials, saved_filename)
-#        print(f'File ID: {file_id}')
         y = pnf.matrix.shape[1] - 1
         for x in pnf.matrix:
             if x[y] == 1 or x[y] == -1:
@@ -110,7 +101,6 @@ for ticker in col:
                     xoro = 'X'
                 else:
                     xoro = 'O'
-#                li.append("https://drive.google.com/file/d/"+file_id+"/view")
                 li.append(xoro)
                 break
     except:
@@ -119,7 +109,7 @@ for ticker in col:
     row_number = row_number + 1
     grid.append(li)
         
-location = "K"+str(init_row_number)+":M"+str(row_number)+""
+location = "T"+str(init_row_number)+":T"+str(row_number)+""
     
 sheet.batch_update([{
     'range': location,
