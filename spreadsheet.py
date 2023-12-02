@@ -43,6 +43,7 @@ sheet = sheet.worksheet("P&F") #replace sheet_name with the name that correspond
 
 column_number = 2
 col = sheet.col_values(column_number)
+col = col[1:]
 start = 2
 row_number = start
 init_row_number = row_number

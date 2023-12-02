@@ -43,6 +43,7 @@ sheet = sheet.worksheet("Stock Analysis") #replace sheet_name with the name that
 
 column_number = 2
 col = sheet.col_values(column_number)
+col = col[4:]
 start = 5
 row_number = start
 init_row_number = row_number
