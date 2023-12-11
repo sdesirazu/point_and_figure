@@ -67,7 +67,6 @@ for ticker in col:
         li.append(df_closest["bid"].tolist()[0])
         li.append(df_closest["ask"].tolist()[0])
         li.append(df_closest["lastPrice"].tolist()[0])
-        li.append(df_closest["volume"].tolist()[0])
         li.append(df_closest["openInterest"].tolist()[0])
 
         # Puts
@@ -79,7 +78,6 @@ for ticker in col:
         li.append(df_closest["bid"].tolist()[0])
         li.append(df_closest["ask"].tolist()[0])
         li.append(df_closest["lastPrice"].tolist()[0])
-        li.append(df_closest["volume"].tolist()[0])
         li.append(df_closest["openInterest"].tolist()[0])
 
 
