@@ -42,7 +42,7 @@ sheet = sheet.worksheet("Weekly Options List") #replace sheet_name with the name
 column_number = 1
 col = sheet.col_values(column_number)
 col = col[4:]
-start = 4
+start = 5
 row_number = start
 init_row_number = row_number
 
@@ -64,12 +64,31 @@ for ticker in col:
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
         li.append(closest_value)
+        li.append(df_closest["bid"].tolist()[0])
+        li.append(df_closest["ask"].tolist()[0])
+        li.append(df_closest["lastPrice"].tolist()[0])
+        li.append(df_closest["bid"].tolist()[0])
+        li.append(df_closest["openInterest"].tolist()[0])
+
+        # Puts
+        df = opt.puts
+
+        df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
+        closest_value = df_closest["strike"].tolist()[0]
+        li.append(closest_value)
+        li.append(df_closest["bid"].tolist()[0])
+        li.append(df_closest["ask"].tolist()[0])
+        li.append(df_closest["lastPrice"].tolist()[0])
+        li.append(df_closest["bid"].tolist()[0])
+        li.append(df_closest["openInterest"].tolist()[0])
+
+
     except:
         print("Failed on ticker"+ticker)
     row_number = row_number + 1
     grid.append(li)
         
-location = "D"+str(init_row_number)+":D"+str(row_number)+""
+location = "D"+str(init_row_number)+":O"+str(row_number)+""
     
 sheet.batch_update([{
     'range': location,
