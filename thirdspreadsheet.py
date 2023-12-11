@@ -39,10 +39,10 @@ sheet = sheet.worksheet("Weekly Options List") #replace sheet_name with the name
 
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
-column_number = 2
+column_number = 1
 col = sheet.col_values(column_number)
-col = col[5:]
-start = 5
+col = col[4:]
+start = 4
 row_number = start
 init_row_number = row_number
 
