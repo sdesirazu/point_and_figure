@@ -12,7 +12,6 @@ try:
 except:
     print("invalid or missing step value")
 
-
 try:
     startDate = sys.argv[2]
 except:
@@ -63,7 +62,7 @@ for ticker in col:
         df = opt.calls
 
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
-        closest_value = df_closest["strike"].tolist()[0])
+        closest_value = df_closest["strike"].tolist()[0]
         li.append(closest_value)
     row_number = row_number + 1
     grid.append(li)
