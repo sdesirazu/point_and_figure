@@ -57,13 +57,13 @@ for ticker in col:
     try:
         data = yf.Ticker(ticker)
         price = calls_strike_guide[row_number]
-        print(price)
         today = dt.now()
         friday = today + timedelta( (4-today.weekday()) % 7 )
         dt_string = friday.strftime("%Y-%m-%d")
 
         opt = data.option_chain(dt_string)
         df = opt.calls
+        print(price)
 
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
@@ -74,7 +74,7 @@ for ticker in col:
         li.append(df_closest["openInterest"].tolist()[0])
 
     except:
-        print("Failed on ticker"+ticker)
+        print("Failed on ticker "+ticker)
     row_number = row_number + 1
     grid.append(li)
         

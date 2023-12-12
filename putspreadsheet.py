@@ -57,7 +57,6 @@ for ticker in col:
     try:
         data = yf.Ticker(ticker)
         price = puts_strike_guide[row_number]
-        print(price)
         today = dt.now()
         friday = today + timedelta( (4-today.weekday()) % 7 )
         dt_string = friday.strftime("%Y-%m-%d")
@@ -67,6 +66,7 @@ for ticker in col:
         # Puts
         df = opt.puts
 
+        print(price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
         li.append(closest_value)
@@ -77,7 +77,7 @@ for ticker in col:
 
 
     except:
-        print("Failed on ticker"+ticker)
+        print("Failed on ticker "+ticker)
     row_number = row_number + 1
     grid.append(li)
         
