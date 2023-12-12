@@ -40,7 +40,7 @@ sheet = sheet.worksheet("Weekly Options List") #replace sheet_name with the name
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
 calls_strike_guide = sheet.col_values(10)
-calls_strike_guide = calls_strike_guide[4:]
+calls_strike_guide = calls_strike_guide[5:]
 
 
 column_number = 1
@@ -59,6 +59,7 @@ for ticker in col:
     try:
         data = yf.Ticker(ticker)
         price = calls_strike_guide[row_number]
+        print(price)
         today = dt.now()
         friday = today + timedelta( (4-today.weekday()) % 7 )
         dt_string = friday.strftime("%Y-%m-%d")
