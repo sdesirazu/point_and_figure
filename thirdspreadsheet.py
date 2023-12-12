@@ -40,8 +40,6 @@ sheet = sheet.worksheet("Weekly Options List") #replace sheet_name with the name
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
 calls_strike_guide = sheet.col_values(10)
-calls_strike_guide = calls_strike_guide[5:]
-
 
 column_number = 1
 col = sheet.col_values(column_number)

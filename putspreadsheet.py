@@ -41,7 +41,6 @@ sheet = sheet.worksheet("Weekly Options List") #replace sheet_name with the name
 
 
 puts_strike_guide = sheet.col_values(4)
-puts_strike_guide = puts_strike_guide[5:]
 
 column_number = 1
 col = sheet.col_values(column_number)
