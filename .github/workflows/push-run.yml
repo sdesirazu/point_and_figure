@@ -35,6 +35,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: run application
       run: |
+        python putspreadsheet.py 3 2023-01-01
         python thirdspreadsheet.py 3 2023-01-01
         python spreadsheet.py 3 2023-01-01
       env:

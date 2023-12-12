@@ -39,15 +39,14 @@ sheet = sheet.worksheet("Weekly Options List") #replace sheet_name with the name
 
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
-calls_strike_guide = sheet.col_values(10)
-calls_strike_guide = calls_strike_guide[4:]
 
+puts_strike_guide = sheet.col_values(4)
+puts_strike_guide = puts_strike_guide[5:]
 
 column_number = 1
 col = sheet.col_values(column_number)
 col = col[5:]
-
-start = 6
+start = 5
 row_number = start
 init_row_number = row_number
 
@@ -58,13 +57,15 @@ for ticker in col:
     li = []
     try:
         data = yf.Ticker(ticker)
-        price = calls_strike_guide[row_number]
+        price = puts_strike_guide[row_number]
         today = dt.now()
         friday = today + timedelta( (4-today.weekday()) % 7 )
         dt_string = friday.strftime("%Y-%m-%d")
 
         opt = data.option_chain(dt_string)
-        df = opt.calls
+
+        # Puts
+        df = opt.puts
 
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
@@ -74,12 +75,13 @@ for ticker in col:
         li.append(df_closest["lastPrice"].tolist()[0])
         li.append(df_closest["openInterest"].tolist()[0])
 
+
     except:
         print("Failed on ticker"+ticker)
     row_number = row_number + 1
     grid.append(li)
         
-location = "K"+str(init_row_number)+":O"+str(row_number)+""
+location = "E"+str(init_row_number)+":I"+str(row_number)+""
     
 sheet.batch_update([{
     'range': location,
