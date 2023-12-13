@@ -40,7 +40,7 @@ sheet = sheet.worksheet("Weekly Options List") #replace sheet_name with the name
 
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
-calls_strike_guide = sheet.col_values(10)
+calls_strike_guide = sheet.col_values(12)
 
 column_number = 1
 col = sheet.col_values(column_number)
@@ -89,13 +89,14 @@ for ticker in col:
         if(math.isnan(openInterest)):
             openInterest = 0.0
         li.append(openInterest)
+        li.append(price)
 
     except:
         print("Failed on ticker "+ticker)
     row_number = row_number + 1
     grid.append(li)
         
-location = "L"+str(init_row_number)+":Q"+str(row_number)+""
+location = "M"+str(init_row_number)+":R"+str(row_number)+""
     
 sheet.batch_update([{
     'range': location,
