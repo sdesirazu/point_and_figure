@@ -96,7 +96,6 @@ for ticker in col:
         
 location = "K"+str(init_row_number)+":O"+str(row_number)+""
     
-print(grid)
 sheet.batch_update([{
     'range': location,
     'values': grid,
