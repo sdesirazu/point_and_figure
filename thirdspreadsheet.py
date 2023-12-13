@@ -67,6 +67,7 @@ for ticker in col:
         price=float(price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
+        li.append(ticker)
         li.append(closest_value)
 
         bid = df_closest["bid"].tolist()[0]
@@ -94,7 +95,7 @@ for ticker in col:
     row_number = row_number + 1
     grid.append(li)
         
-location = "K"+str(init_row_number)+":O"+str(row_number)+""
+location = "K"+str(init_row_number)+":P"+str(row_number)+""
     
 sheet.batch_update([{
     'range': location,
