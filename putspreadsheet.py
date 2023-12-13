@@ -65,7 +65,6 @@ for ticker in col:
 
         # Puts
         df = opt.puts
-
         price=float(price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
@@ -75,13 +74,14 @@ for ticker in col:
         li.append(df_closest["lastPrice"].tolist()[0])
         li.append(df_closest["openInterest"].tolist()[0])
 
-
     except:
         print("Failed on ticker "+ticker)
     row_number = row_number + 1
     grid.append(li)
         
 location = "E"+str(init_row_number)+":I"+str(row_number)+""
+
+print(grid)
     
 sheet.batch_update([{
     'range': location,
