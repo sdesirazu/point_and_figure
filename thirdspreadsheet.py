@@ -67,11 +67,26 @@ for ticker in col:
         price=float(price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
-        li.append(closest_value)
-        li.append(df_closest["bid"].tolist()[0])
-        li.append(df_closest["ask"].tolist()[0])
-        li.append(df_closest["lastPrice"].tolist()[0])
-        li.append(df_closest["openInterest"].tolist()[0])
+
+        bid = df_closest["bid"].tolist()[0]
+        if(math.isnan(bid)):
+            bid = 0.0
+        li.append(bid)
+
+        ask = df_closest["ask"].tolist()[0]
+        if(math.isnan(ask)):
+            ask = 0.0
+        li.append(ask)
+
+        lastPrice = df_closest["lastPrice"].tolist()[0]
+        if(math.isnan(lastPrice)):
+            lastPrice = 0.0
+        li.append(lastPrice)
+        
+        openInterest = df_closest["openInterest"].tolist()[0]
+        if(math.isnan(openInterest)):
+            openInterest = 0.0
+        li.append(openInterest)
 
     except:
         print("Failed on ticker "+ticker)
