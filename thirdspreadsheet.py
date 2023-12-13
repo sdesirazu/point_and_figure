@@ -63,10 +63,10 @@ for ticker in col:
 
         opt = data.option_chain(dt_string)
         df = opt.calls
-        print(price)
 
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
+        print(price)
         li.append(closest_value)
         li.append(df_closest["bid"].tolist()[0])
         li.append(df_closest["ask"].tolist()[0])
