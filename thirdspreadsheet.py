@@ -45,7 +45,6 @@ calls_strike_guide = sheet.col_values(10)
 column_number = 1
 col = sheet.col_values(column_number)
 col = col[5:]
-
 start = 6
 row_number = start
 init_row_number = row_number
@@ -68,6 +67,7 @@ for ticker in col:
         price=float(price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
+        li.append(closest_value)
 
         bid = df_closest["bid"].tolist()[0]
         if(math.isnan(bid)):

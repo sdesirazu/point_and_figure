@@ -46,7 +46,7 @@ puts_strike_guide = sheet.col_values(4)
 column_number = 1
 col = sheet.col_values(column_number)
 col = col[5:]
-start = 5
+start = 6
 row_number = start
 init_row_number = row_number
 
