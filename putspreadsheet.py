@@ -97,7 +97,7 @@ for ticker in col:
     row_number = row_number + 1
     grid.append(li)
         
-location = "E"+str(init_row_number)+":J"+str(row_number)+""
+location = "E"+str(init_row_number)+":K"+str(row_number)+""
 
 sheet.batch_update([{
     'range': location,
