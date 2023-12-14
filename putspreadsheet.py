@@ -66,7 +66,7 @@ for ticker in col:
 
         # Puts
         df = opt.puts
-        price=int(price)
+        price=float(price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
         li.append(ticker)
@@ -91,6 +91,7 @@ for ticker in col:
         if(math.isnan(openInterest)):
             openInterest = 0.0
         li.append(openInterest)
+        li.append(price)
 
     except:
         print("Failed on ticker "+ticker)
