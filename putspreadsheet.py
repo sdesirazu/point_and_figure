@@ -57,7 +57,7 @@ for ticker in col:
     li = []
     try:
         data = yf.Ticker(ticker)
-        price = puts_strike_guide[row_number]
+        price = puts_strike_guide[row_number-1]
         today = dt.now()
         friday = today + timedelta( (4-today.weekday()) % 7 )
         dt_string = friday.strftime("%Y-%m-%d")
