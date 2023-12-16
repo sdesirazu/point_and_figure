@@ -66,10 +66,9 @@ for ticker in col:
         opt = data.option_chain(dt_string)
         df = opt.calls
 
-        print("ticker " + price)
 #        price=float(price)
-        print("ticker " + price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
+        print("ticker " + price)
         closest_value = df_closest["strike"].tolist()[0]
         li.append(ticker)
         li.append(closest_value)
