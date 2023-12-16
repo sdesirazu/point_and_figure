@@ -64,11 +64,11 @@ for ticker in col:
     try:
         data = yf.Ticker(ticker)
         price = puts_strike_guide[row_number-1]
-        print("ticker " + price)
         opt = data.option_chain(dt_string)
 
         # Puts
         df = opt.puts
+        print("ticker " + price)
         price=float(price)
         print("ticker " + price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
