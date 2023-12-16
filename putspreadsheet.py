@@ -72,9 +72,9 @@ for ticker in col:
         print(type(price))
         price=float(price)
         print(type(price))
-        print("ticker " + price)
+        print("ticker " + ticker)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
-        print("ticker " + price)
+        print("ticker " + ticker)
         closest_value = df_closest["strike"].tolist()[0]
         li.append(ticker)
         li.append(closest_value)
