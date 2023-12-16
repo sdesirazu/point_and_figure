@@ -41,7 +41,7 @@ sheet = sheet.worksheet("Weekly Options List") #replace sheet_name with the name
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
 
-puts_strike_guide = sheet.col_values(4)
+puts_strike_guide = sheet.col_values(5)
 
 column_number = 1
 col = sheet.col_values(column_number)
@@ -97,7 +97,7 @@ for ticker in col:
     row_number = row_number + 1
     grid.append(li)
         
-location = "E"+str(init_row_number)+":J"+str(row_number)+""
+location = "F"+str(init_row_number)+":K"+str(row_number)+""
 
 sheet.batch_update([{
     'range': location,
