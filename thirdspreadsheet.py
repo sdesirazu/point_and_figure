@@ -63,6 +63,7 @@ for ticker in col:
     try:
         data = yf.Ticker(ticker)
         price = calls_strike_guide[row_number-1]
+        print("ticker " + price)
         opt = data.option_chain(dt_string)
         df = opt.calls
 

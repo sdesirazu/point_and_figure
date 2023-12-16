@@ -51,19 +51,20 @@ row_number = start
 init_row_number = row_number
 
 grid = []
+today = dt.now()
+friday = today + timedelta( (4-today.weekday()) % 7 )
+dt_string = friday.strftime("%Y-%m-%d")
+print(dt_string)
 for ticker in col:
     if ticker == "Ticker":
         continue
     if ticker == "Filter":
         continue
     li = []
-    today = dt.now()
-    friday = today + timedelta( (4-today.weekday()) % 7 )
-    dt_string = friday.strftime("%Y-%m-%d")
-    print(dt_string)
     try:
         data = yf.Ticker(ticker)
         price = puts_strike_guide[row_number-1]
+        print("ticker " + price)
         opt = data.option_chain(dt_string)
 
         # Puts
