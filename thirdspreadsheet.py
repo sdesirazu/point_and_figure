@@ -44,7 +44,7 @@ calls_strike_guide = sheet.col_values(13)
 
 column_number = 1
 col = sheet.col_values(column_number)
-col = col[5:]
+col = col[6:]
 start = 7
 row_number = start
 init_row_number = row_number
