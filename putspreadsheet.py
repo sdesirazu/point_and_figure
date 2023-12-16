@@ -54,6 +54,8 @@ grid = []
 for ticker in col:
     if ticker == "Ticker":
         continue
+    if ticker == "Filter":
+        continue
     li = []
     try:
         data = yf.Ticker(ticker)
@@ -90,7 +92,7 @@ for ticker in col:
         openInterest = df_closest["openInterest"].tolist()[0]
         if(math.isnan(openInterest)):
             openInterest = 0.0
-        li.append(openInterest)
+        li.append(price)
 
     except:
         print("Failed on ticker "+ticker)
