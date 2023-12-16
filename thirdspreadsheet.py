@@ -56,17 +56,18 @@ for ticker in col:
     if ticker == "Filter":
         continue
     li = []
+    today = dt.now()
+    friday = today + timedelta( (4-today.weekday()) % 7 )
+    dt_string = friday.strftime("%Y-%m-%d")
+    print(dt_string)
     try:
         data = yf.Ticker(ticker)
         price = calls_strike_guide[row_number-1]
-        today = dt.now()
-        friday = today + timedelta( (4-today.weekday()) % 7 )
-        dt_string = friday.strftime("%Y-%m-%d")
-
         opt = data.option_chain(dt_string)
         df = opt.calls
 
         price=float(price)
+        print("ticker " + price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
         li.append(ticker)
