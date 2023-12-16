@@ -68,7 +68,8 @@ for ticker in col:
 
         # Puts
         df = opt.puts
-#        price=float(price)
+        price=float(price)
+        print("ticker " + price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         print("ticker " + price)
         closest_value = df_closest["strike"].tolist()[0]
