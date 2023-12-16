@@ -46,7 +46,7 @@ puts_strike_guide = sheet.col_values(4)
 column_number = 1
 col = sheet.col_values(column_number)
 col = col[5:]
-start = 6
+start = 7
 row_number = start
 init_row_number = row_number
 
@@ -91,14 +91,13 @@ for ticker in col:
         if(math.isnan(openInterest)):
             openInterest = 0.0
         li.append(openInterest)
-        li.append(price)
 
     except:
         print("Failed on ticker "+ticker)
     row_number = row_number + 1
     grid.append(li)
         
-location = "E"+str(init_row_number)+":K"+str(row_number)+""
+location = "E"+str(init_row_number)+":J"+str(row_number)+""
 
 sheet.batch_update([{
     'range': location,
