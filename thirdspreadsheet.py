@@ -53,7 +53,6 @@ grid = []
 today = dt.now()
 friday = today + timedelta( (4-today.weekday()) % 7 )
 dt_string = friday.strftime("%Y-%m-%d")
-print(dt_string)
 for ticker in col:
     if ticker == "Ticker":
         continue
@@ -66,13 +65,8 @@ for ticker in col:
         opt = data.option_chain(dt_string)
         df = opt.calls
 
-        print("ticker " + price)
-        print(type(price))
         price=float(price)
-        print(type(price))
-        print("ticker " + ticker)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
-        print("ticker " + ticker)
         closest_value = df_closest["strike"].tolist()[0]
         li.append(ticker)
         li.append(closest_value)
@@ -95,7 +89,7 @@ for ticker in col:
         openInterest = df_closest["openInterest"].tolist()[0]
         if(math.isnan(openInterest)):
             openInterest = 0.0
-        li.append(price)
+        li.append(openInterest)
 
     except:
         print("Failed on ticker "+ticker)
