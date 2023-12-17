@@ -61,13 +61,19 @@ for ticker in col:
     li = []
     try:
         data = yf.Ticker(ticker)
-        price = calls_strike_guide[row_number-1]
+#        price = calls_strike_guide[row_number-1]
+        price = data.info['currentPrice']
+
+        percent = worksheet.acell('F1').value
+        price = price + (price * (percent / 100.0))
+
         opt = data.option_chain(dt_string)
         df = opt.calls
 
         price=float(price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
+        li.append(price)
         li.append(ticker)
         li.append(closest_value)
 
@@ -96,7 +102,7 @@ for ticker in col:
     row_number = row_number + 1
     grid.append(li)
         
-location = "N"+str(init_row_number)+":S"+str(row_number)+""
+location = "M"+str(init_row_number)+":S"+str(row_number)+""
     
 sheet.batch_update([{
     'range': location,
