@@ -74,7 +74,7 @@ for ticker in col:
         price=float(price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
-        li.append(calcpnf.calcpnf(ticker))
+        li.append(calcpnf.calcpnf(ticker,startDate))
         li.append(price)
         li.append(ticker)
         li.append(closest_value)

@@ -2,7 +2,7 @@ import yfinance as yf
 from pypnf import PointFigureChart
 
 
-def calcpnf(ticker):
+def calcpnf(ticker,startDate):
     # function body 
 
     try:
