@@ -67,7 +67,7 @@ for ticker in col:
         price = data.info['currentPrice']
 
         price = price + (price * (percent / 100.0))
-
+        print(price)
         opt = data.option_chain(dt_string)
         df = opt.calls
 
