@@ -53,6 +53,8 @@ grid = []
 today = dt.now()
 friday = today + timedelta( (4-today.weekday()) % 7 )
 dt_string = friday.strftime("%Y-%m-%d")
+percent = sheet.acell('F1').value
+print(percent)
 for ticker in col:
     if ticker == "Ticker":
         continue
@@ -64,7 +66,6 @@ for ticker in col:
 #        price = calls_strike_guide[row_number-1]
         price = data.info['currentPrice']
 
-        percent = worksheet.acell('F1').value
         price = price + (price * (percent / 100.0))
 
         opt = data.option_chain(dt_string)
