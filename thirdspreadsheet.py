@@ -8,6 +8,8 @@ from google.oauth2 import service_account
 from datetime import datetime as dt, date, time, timedelta
 import yfinance as yf
 import upload_basic
+import calcpnf
+
 try:
     step = float(sys.argv[1])
 except:
@@ -72,7 +74,7 @@ for ticker in col:
         price=float(price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
-        li.append("X")
+        li.append(calcpnf.calcpnf(ticker))
         li.append(price)
         li.append(ticker)
         li.append(closest_value)
