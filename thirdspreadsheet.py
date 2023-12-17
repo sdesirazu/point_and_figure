@@ -40,7 +40,6 @@ sheet = sheet.worksheet("Weekly Options List") #replace sheet_name with the name
 
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
-calls_strike_guide = sheet.col_values(13)
 
 column_number = 1
 col = sheet.col_values(column_number)
@@ -64,17 +63,16 @@ for ticker in col:
     li = []
     try:
         data = yf.Ticker(ticker)
-#        price = calls_strike_guide[row_number-1]
         price = data.info['currentPrice']
 
         price = price + (price * (percent / 100.0))
-        print(price)
         opt = data.option_chain(dt_string)
         df = opt.calls
 
         price=float(price)
         df_closest = df.iloc[(df["strike"]-price).abs().argsort()[:1]]
         closest_value = df_closest["strike"].tolist()[0]
+        li.append("X")
         li.append(price)
         li.append(ticker)
         li.append(closest_value)
@@ -104,7 +102,7 @@ for ticker in col:
     row_number = row_number + 1
     grid.append(li)
         
-location = "M"+str(init_row_number)+":S"+str(row_number)+""
+location = "N"+str(init_row_number)+":U"+str(row_number)+""
     
 sheet.batch_update([{
     'range': location,

@@ -41,8 +41,6 @@ sheet = sheet.worksheet("Weekly Options List") #replace sheet_name with the name
 # for each cell in the sheet call the point and figure and write it back to the sheet
 
 
-puts_strike_guide = sheet.col_values(5)
-
 column_number = 1
 col = sheet.col_values(column_number)
 col = col[6:]
@@ -70,7 +68,6 @@ for ticker in col:
 
         price = price - (price * (percent / 100.0))
         print(price)
-#        price = puts_strike_guide[row_number-1]
         opt = data.option_chain(dt_string)
 
         # Puts
@@ -108,7 +105,7 @@ for ticker in col:
     row_number = row_number + 1
     grid.append(li)
         
-location = "D"+str(init_row_number)+":K"+str(row_number)+""
+location = "E"+str(init_row_number)+":L"+str(row_number)+""
 
 sheet.batch_update([{
     'range': location,
