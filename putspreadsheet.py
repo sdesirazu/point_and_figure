@@ -74,9 +74,10 @@ for ticker in col:
         df = opt.puts
 
         price=float(price)
-        df_sorted = df["strike"].sort_values(ascending=False)
-        df_nearest = (df_sorted[df_sorted<=price])
-        closest_value = df_nearest.tolist()[0]
+        df_sorted = df.sort_values(by='strike',ascending=False)
+        df_closest = (df_sorted[df_sorted["strike"]<=price])
+        closest_value = df_closest["strike"].tolist()[0]
+
         li.append(price)
         li.append(ticker)
         li.append(closest_value)
