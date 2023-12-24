@@ -109,7 +109,7 @@ for ticker in col:
         
 location = "N"+str(init_row_number)+":U"+str(row_number)+""
 
-sheet.update('G1', today_string)
+sheet.update('B3', today_string)
 sheet.batch_update([{
     'range': location,
     'values': grid,
