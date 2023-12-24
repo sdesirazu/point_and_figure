@@ -52,6 +52,7 @@ init_row_number = row_number
 
 grid = []
 today = dt.now()
+today_string = today.strftime("%Y-%m-%d %H:%M:%s")
 friday = today + timedelta( (4-today.weekday()) % 7 )
 dt_string = friday.strftime("%Y-%m-%d")
 percent = sheet.acell('F1').value
@@ -107,7 +108,8 @@ for ticker in col:
     grid.append(li)
         
 location = "N"+str(init_row_number)+":U"+str(row_number)+""
-    
+
+sheet.update('G1', today_string)
 sheet.batch_update([{
     'range': location,
     'values': grid,
