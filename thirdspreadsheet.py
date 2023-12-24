@@ -52,8 +52,7 @@ init_row_number = row_number
 
 grid = []
 today = dt.now()
-today_string = today.strftime("%Y-%m-%d %H:%M:%S
-")
+today_string = today.strftime("%Y-%m-%d %H:%M:%S")
 friday = today + timedelta( (4-today.weekday()) % 7 )
 dt_string = friday.strftime("%Y-%m-%d")
 percent = sheet.acell('F1').value
