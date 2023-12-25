@@ -112,7 +112,9 @@ location = "N"+str(init_row_number)+":U"+str(row_number)+""
 
 now_time = dt.now(timezone('Australia/Sydney'))
 fmt = "%Y-%m-%d %H:%M:%S %Z%z"
-sheet.update('B3', now_time.strftime(fmt))
+now_time = now_time.strftime(fmt)
+print(now_time)
+sheet.update('B3', now_time)
 sheet.batch_update([{
     'range': location,
     'values': grid,

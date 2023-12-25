@@ -8,7 +8,7 @@ from google.oauth2 import service_account
 from datetime import datetime as dt, date, time, timedelta
 import yfinance as yf
 import upload_basic
-import BSMerton
+from BSMerton import BSMerton
 
 def last_div_value(data):
     dividends = data.dividends
@@ -123,8 +123,13 @@ for ticker in col:
         dividend_continuous_rate = last_dividend/data.info['currentPrice']
         num_days_to_expire = friday - today
         
+        print(risk_free_rate)
+        print(dividend_continuous_rate)
+        print(num_days_to_expire.days)
+        print(impliedVolatility)
         test = BSMerton([-1,data.info['currentPrice'],closest_value,risk_free_rate,dividend_continuous_rate,num_days_to_expire.days,impliedVolatility])
-
+        print("After BSMerton")
+        
         print('Premium: {}\nDelta:   {}\nVega:    {}'.format(test.premium()[0],test.delta()[0], test.vega()[0]))
         print('Theta:   {}\nRho:     {}\nPhi:     {}'.format(test.theta()[0],test.rho()[0], test.phi()[0]))
         print('Gamma:   {}\nCharm:   {}\nVanna:   {}'.format(test.gamma()[0],test.dDeltadTime()[0], test.dDeltadVol()[0]))
