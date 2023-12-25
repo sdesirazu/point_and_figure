@@ -120,7 +120,7 @@ for ticker in col:
 
         last_dividend = last_div_value(data)
         risk_free_rate = 0.06
-        dividend_continuos_rate = last_dividend/data.info['currentPrice']
+        dividend_continuous_rate = last_dividend/data.info['currentPrice']
         num_days_to_expire = friday - today
         
         test = BSMerton([-1,data.info['currentPrice'],closest_value,risk_free_rate,dividend_continuous_rate,num_days_to_expire.days,impliedVolatility])
