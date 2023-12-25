@@ -127,6 +127,7 @@ for ticker in col:
         print(dividend_continuous_rate)
         print(num_days_to_expire.days)
         print(impliedVolatility)
+        print(data.info['currentPrice'])
         test = BSMerton([-1,data.info['currentPrice'],closest_value,risk_free_rate,dividend_continuous_rate,num_days_to_expire.days,impliedVolatility])
         print("After BSMerton")
         
