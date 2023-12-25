@@ -10,6 +10,9 @@ import yfinance as yf
 import upload_basic
 import calcpnf
 from pytz import timezone
+from BSMerton import BSMerton
+import last_div_value
+import rfr
 
 try:
     step = float(sys.argv[1])
@@ -77,6 +80,7 @@ for ticker in col:
         df_sorted = df.sort_values(by='strike',ascending=True)
         df_closest = (df_sorted[df_sorted["strike"]>=price])
         closest_value = df_closest["strike"].tolist()[0]
+        impliedVolatility = df_closest["impliedVolatility"].tolist()[0]
 
         li.append(calcpnf.calcpnf(ticker,startDate))
         li.append(price)
@@ -103,12 +107,34 @@ for ticker in col:
             openInterest = 0.0
         li.append(openInterest)
 
+        # calculate delta
+        last_dividend = last_div_value.last_div_value(data)
+        risk_free_rate = rfr.get_rfr()
+        dividend_continuous_rate = last_dividend/data.info['currentPrice']
+        num_days_to_expire = friday - today
+        
+        print(risk_free_rate)
+        print(dividend_continuous_rate)
+        print(num_days_to_expire.days)
+        print(impliedVolatility)
+        print(data.info['currentPrice'])
+        print(closest_value)
+        test = BSMerton([1,data.info['currentPrice'],closest_value,risk_free_rate,dividend_continuous_rate,num_days_to_expire.days,impliedVolatility])
+        print("After BSMerton")
+        li.append[test.delta()[0])
+        print('Premium: {}\nDelta:   {}\nVega:    {}'.format(test.premium()[0],test.delta()[0], test.vega()[0]))
+        print('Theta:   {}\nRho:     {}\nPhi:     {}'.format(test.theta()[0],test.rho()[0], test.phi()[0]))
+        print('Gamma:   {}\nCharm:   {}\nVanna:   {}'.format(test.gamma()[0],test.dDeltadTime()[0], test.dDeltadVol()[0]))
+        print('Vomma:   {}'.format(test.dVegadVol()[0]))
+
     except:
         print("Failed on ticker "+ticker)
+
     row_number = row_number + 1
+
     grid.append(li)
         
-location = "N"+str(init_row_number)+":U"+str(row_number)+""
+location = "P"+str(init_row_number)+":W"+str(row_number)+""
 
 now_time = dt.now(timezone('Australia/Sydney'))
 fmt = "%Y-%m-%d %H:%M:%S %Z%z"

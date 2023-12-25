@@ -9,19 +9,8 @@ from datetime import datetime as dt, date, time, timedelta
 import yfinance as yf
 import upload_basic
 from BSMerton import BSMerton
-
-def last_div_value(data):
-    dividends = data.dividends
-    div_sorted = dividends.sort_values(ascending=False)
-    last_div = 0.0
-    now = dt.now()
-    curr_year = now.year
-    for k in div_sorted.keys():
-        last_div_date = k
-        if curr_year == last_div_date.year or (curr_year - 1) == (last_div_date.year):
-            last_div = (div_sorted[k])
-            break
-    return (last_div)
+import last_div_value
+import rfr
 
 try:
     step = float(sys.argv[1])
@@ -70,6 +59,8 @@ dt_string = friday.strftime("%Y-%m-%d")
 percent = sheet.acell('F1').value
 
 percent = float(percent)
+
+
 for ticker in col:
     if ticker == "Ticker":
         continue
@@ -118,8 +109,8 @@ for ticker in col:
             openInterest = 0.0
         li.append(openInterest)
 
-        last_dividend = last_div_value(data)
-        risk_free_rate = 0.06
+        last_dividend = last_div_value.last_div_value(data)
+        risk_free_rate = rfr.get_rfr()
         dividend_continuous_rate = last_dividend/data.info['currentPrice']
         num_days_to_expire = friday - today
         
@@ -128,9 +119,10 @@ for ticker in col:
         print(num_days_to_expire.days)
         print(impliedVolatility)
         print(data.info['currentPrice'])
+        print(closest_value)
         test = BSMerton([-1,data.info['currentPrice'],closest_value,risk_free_rate,dividend_continuous_rate,num_days_to_expire.days,impliedVolatility])
         print("After BSMerton")
-        
+        li.append[test.delta()[0])
         print('Premium: {}\nDelta:   {}\nVega:    {}'.format(test.premium()[0],test.delta()[0], test.vega()[0]))
         print('Theta:   {}\nRho:     {}\nPhi:     {}'.format(test.theta()[0],test.rho()[0], test.phi()[0]))
         print('Gamma:   {}\nCharm:   {}\nVanna:   {}'.format(test.gamma()[0],test.dDeltadTime()[0], test.dDeltadVol()[0]))
@@ -141,7 +133,7 @@ for ticker in col:
     row_number = row_number + 1
     grid.append(li)
         
-location = "E"+str(init_row_number)+":L"+str(row_number)+""
+location = "E"+str(init_row_number)+":M"+str(row_number)+""
 
 sheet.batch_update([{
     'range': location,
