@@ -122,7 +122,7 @@ for ticker in col:
         print(closest_value)
         test = BSMerton([-1,data.info['currentPrice'],closest_value,risk_free_rate,dividend_continuous_rate,num_days_to_expire.days,impliedVolatility])
         print("After BSMerton")
-        li.append[test.delta()[0])
+        li.append(test.delta()[0])
         print('Premium: {}\nDelta:   {}\nVega:    {}'.format(test.premium()[0],test.delta()[0], test.vega()[0]))
         print('Theta:   {}\nRho:     {}\nPhi:     {}'.format(test.theta()[0],test.rho()[0], test.phi()[0]))
         print('Gamma:   {}\nCharm:   {}\nVanna:   {}'.format(test.gamma()[0],test.dDeltadTime()[0], test.dDeltadVol()[0]))
