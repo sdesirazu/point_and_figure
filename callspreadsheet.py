@@ -115,7 +115,7 @@ for ticker in col:
         
         test = BSMerton([1,data.info['currentPrice'],closest_value,risk_free_rate,dividend_continuous_rate,num_days_to_expire.days,impliedVolatility])
 
-        li.append[test.delta()[0])
+        li.append(test.delta()[0])
 
     except:
         print("Failed on ticker "+ticker)
