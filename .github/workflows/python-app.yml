@@ -37,7 +37,7 @@ jobs:
     - name: run application
       run: |
         python putspreadsheet.py 3 2023-01-01
-        python thirdspreadsheet.py 3 2023-01-01
+        python callspreadsheet.py 3 2023-01-01
       env:
         TOKEN: ${{ secrets.RANDOM_SECRET}} 
     - name: Lint with flake8

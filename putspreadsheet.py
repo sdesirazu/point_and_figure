@@ -114,19 +114,10 @@ for ticker in col:
         dividend_continuous_rate = last_dividend/data.info['currentPrice']
         num_days_to_expire = friday - today
         
-        print(risk_free_rate)
-        print(dividend_continuous_rate)
-        print(num_days_to_expire.days)
-        print(impliedVolatility)
-        print(data.info['currentPrice'])
-        print(closest_value)
         test = BSMerton([-1,data.info['currentPrice'],closest_value,risk_free_rate,dividend_continuous_rate,num_days_to_expire.days,impliedVolatility])
-        print("After BSMerton")
+
         li.append(test.delta()[0])
-        print('Premium: {}\nDelta:   {}\nVega:    {}'.format(test.premium()[0],test.delta()[0], test.vega()[0]))
-        print('Theta:   {}\nRho:     {}\nPhi:     {}'.format(test.theta()[0],test.rho()[0], test.phi()[0]))
-        print('Gamma:   {}\nCharm:   {}\nVanna:   {}'.format(test.gamma()[0],test.dDeltadTime()[0], test.dDeltadVol()[0]))
-        print('Vomma:   {}'.format(test.dVegadVol()[0]))
+
 
     except:
         print("Failed on ticker "+ticker)
