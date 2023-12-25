@@ -4,6 +4,6 @@ def get_rfr():
 
     rfr = yf.Ticker("^IRX")
 
-    rfr = rfr.info["fiftyDayAverage"])/100.0
+    rfr = rfr.info["fiftyDayAverage"]/100.0
 
     return rfr
