@@ -8,7 +8,7 @@ from google.oauth2 import service_account
 from datetime import datetime as dt, date, time, timedelta
 import yfinance as yf
 import upload_basic
-import options
+import BSMerton
 
 def last_div_value(data):
     dividends = data.dividends
