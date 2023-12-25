@@ -9,6 +9,7 @@ from datetime import datetime as dt, date, time, timedelta
 import yfinance as yf
 import upload_basic
 import calcpnf
+from pytz import timezone
 
 try:
     step = float(sys.argv[1])
@@ -109,7 +110,9 @@ for ticker in col:
         
 location = "N"+str(init_row_number)+":U"+str(row_number)+""
 
-sheet.update('B3', today_string)
+now_time = dt.now(timezone('Australia/Sydney'))
+fmt = "%Y-%m-%d %H:%M:%S %Z%z"
+sheet.update('B3', now_time.strftime(fmt))
 sheet.batch_update([{
     'range': location,
     'values': grid,
