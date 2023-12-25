@@ -124,7 +124,7 @@ for ticker in col:
 
     grid.append(li)
         
-location = "P"+str(init_row_number)+":W"+str(row_number)+""
+location = "O"+str(init_row_number)+":W"+str(row_number)+""
 
 now_time = dt.now(timezone('Australia/Sydney'))
 fmt = "%Y-%m-%d %H:%M:%S %Z%z"
