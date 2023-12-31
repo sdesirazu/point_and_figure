@@ -1,3 +1,4 @@
+import pandas as pd
 import math
 import time
 import gspread
@@ -103,6 +104,7 @@ grid = []
 today = dt.now()
 friday = today + timedelta( (4-today.weekday()) % 7 )
 dt_string = friday.strftime("%Y-%m-%d")
+risk_free_rate = rfr.get_rfr()
 
 for ticker in col:
     if ticker == "Ticker":
