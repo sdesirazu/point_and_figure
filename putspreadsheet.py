@@ -33,7 +33,7 @@ def find_10_delta_row(ticker,data,dt_string,friday,today):
             strike = row['strike']
             bid = row['bid']
             ask = row['ask']
-            last = row['lastPrice']
+            lastPrice = row['lastPrice']
             openInterest = row['openInterest']
             impliedVolatility = row['impliedVolatility']
 
@@ -47,7 +47,7 @@ def find_10_delta_row(ticker,data,dt_string,friday,today):
             li.append(ticker)
             li.append(bid)
             li.append(ask)
-            li.append(last)
+            li.append(lastPrice)
             li.append(openInterest)
             li.append(test.delta()[0])
             grid.append(li)
