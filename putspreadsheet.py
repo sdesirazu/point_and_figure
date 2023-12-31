@@ -13,6 +13,8 @@ import last_div_value
 import rfr
 import calcpnf
 
+my_columns = ['currentPrice','strike','ticker','bid','ask','lastPrice','openInterest','delta']
+
 def find_10_delta_row(ticker,data,dt_string,friday,today):
     grid = []
     try:
@@ -43,7 +45,6 @@ def find_10_delta_row(ticker,data,dt_string,friday,today):
             li.append(currentPrice)
             li.append(strike)
             li.append(ticker)
-            li.append(strike)
             li.append(bid)
             li.append(ask)
             li.append(last)
