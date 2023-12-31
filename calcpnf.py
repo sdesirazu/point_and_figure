@@ -2,11 +2,10 @@ import yfinance as yf
 from pypnf import PointFigureChart
 
 
-def calcpnf(ticker,startDate):
+def calcpnf(data,ticker,startDate):
     # function body 
 
     try:
-        data = yf.Ticker(ticker)
         price = data.info['currentPrice']
 
         if price < 0.25:

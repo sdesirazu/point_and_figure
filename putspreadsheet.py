@@ -7,10 +7,57 @@ import sys
 from google.oauth2 import service_account
 from datetime import datetime as dt, date, time, timedelta
 import yfinance as yf
-import upload_basic
 from BSMerton import BSMerton
 import last_div_value
 import rfr
+import calcpnf
+
+def find_10_delta_row(ticker,data,dt_string,friday,today):
+    grid = []
+    try:
+        price = data.info['currentPrice']
+        
+        opt = data.option_chain(dt_string)
+        
+        # Puts
+        df = opt.puts
+
+        df_sorted = df.sort_values(by='strike',ascending=False)
+
+        currentPrice = float(price)
+        for index, row in df_sorted.iterrows():
+            li = []
+            strike = row['strike']
+            bid = row['bid']
+            ask = row['ask']
+            last = row['lastPrice']
+            openInterest = row['openInterest']
+            impliedVolatility = row['impliedVolatility']
+
+            last_dividend = last_div_value.last_div_value(data)
+            dividend_continuous_rate = last_dividend/data.info['currentPrice']
+            num_days_to_expire = friday - today
+        
+            test = BSMerton([-1,currentPrice,strike,risk_free_rate,dividend_continuous_rate,num_days_to_expire.days,impliedVolatility])
+            li.append(currentPrice)
+            li.append(strike)
+            li.append(ticker)
+            li.append(strike)
+            li.append(bid)
+            li.append(ask)
+            li.append(last)
+            li.append(openInterest)
+            li.append(test.delta()[0])
+            grid.append(li)
+        # create the dataframe
+        my_df = pd.DataFrame(data=grid,columns=my_columns)
+        df_closest = my_df[my_df["delta"]>= -0.15]
+        return df_closest.iloc[0]
+
+    except Exception as e: print("Exception is ", e)
+
+
+
 
 try:
     step = float(sys.argv[1])
@@ -56,10 +103,6 @@ grid = []
 today = dt.now()
 friday = today + timedelta( (4-today.weekday()) % 7 )
 dt_string = friday.strftime("%Y-%m-%d")
-percent = sheet.acell('F1').value
-
-percent = float(percent)
-
 
 for ticker in col:
     if ticker == "Ticker":
@@ -69,64 +112,33 @@ for ticker in col:
     li = []
     try:
         data = yf.Ticker(ticker)
-        price = data.info['currentPrice']
-        li.append(price)
+        row = find_10_delta_row(ticker,data,dt_string,friday,today)
 
-        price = price - (price * (percent / 100.0))
+        li.append(row['price'])
+        li.append(row['strike'])
 
-        opt = data.option_chain(dt_string)
-
-        # Puts
-        df = opt.puts
-
-        price=float(price)
-        df_sorted = df.sort_values(by='strike',ascending=False)
-        df_closest = (df_sorted[df_sorted["strike"]<=price])
-        closest_value = df_closest["strike"].tolist()[0]
-        impliedVolatility = df_closest["impliedVolatility"].tolist()[0]
-
-        li.append(price)
         li.append(ticker)
-        li.append(closest_value)
+        li.append(row['strike'])
 
-        bid = df_closest["bid"].tolist()[0]
-        if(math.isnan(bid)):
-            bid = 0.0
-        li.append(bid)
+        li.append(row['bid'])
+        li.append(row['ask'])
+        li.append(row['lastPrice'])
+        li.append(row['openInterest'])
 
-        ask = df_closest["ask"].tolist()[0]
-        if(math.isnan(ask)):
-            ask = 0.0
-        li.append(ask)
+        li.append(row['delta'])
+        li.append(calcpnf.calcpnf(data,ticker,startDate))
 
-        lastPrice = df_closest["lastPrice"].tolist()[0]
-        if(math.isnan(lastPrice)):
-            lastPrice = 0.0
-        li.append(lastPrice)
-        
-        openInterest = df_closest["openInterest"].tolist()[0]
-        if(math.isnan(openInterest)):
-            openInterest = 0.0
-        li.append(openInterest)
+    except Exception as e: print("Failed on ticker ", ticker, " ", e)
 
-        last_dividend = last_div_value.last_div_value(data)
-        risk_free_rate = rfr.get_rfr()
-        dividend_continuous_rate = last_dividend/data.info['currentPrice']
-        num_days_to_expire = friday - today
-        
-        test = BSMerton([-1,data.info['currentPrice'],closest_value,risk_free_rate,dividend_continuous_rate,num_days_to_expire.days,impliedVolatility])
-
-        li.append(test.delta()[0])
-
-
-    except:
-        print("Failed on ticker "+ticker)
     row_number = row_number + 1
+
     grid.append(li)
         
-location = "E"+str(init_row_number)+":M"+str(row_number)+""
+location = "E"+str(init_row_number)+":N"+str(row_number)+""
 
 sheet.batch_update([{
     'range': location,
     'values': grid,
 }])
+
+
