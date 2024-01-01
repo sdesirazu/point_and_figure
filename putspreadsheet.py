@@ -117,7 +117,7 @@ for ticker in col:
         data = yf.Ticker(ticker)
         row = find_10_delta_row(ticker,data,dt_string,friday,today)
 
-        li.append(row['price'])
+        li.append(row['currentPrice'])
         li.append(row['strike'])
 
         li.append(ticker)
