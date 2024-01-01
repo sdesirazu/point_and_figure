@@ -42,14 +42,14 @@ def find_10_delta_row(ticker,data,dt_string,friday,today):
             num_days_to_expire = friday - today
         
             test = BSMerton([-1,currentPrice,strike,risk_free_rate,dividend_continuous_rate,num_days_to_expire.days,impliedVolatility])
-            li.append(currentPrice)
-            li.append(strike)
+            li.append(float(currentPrice))
+            li.append(float(strike))
             li.append(ticker)
-            li.append(bid)
-            li.append(ask)
-            li.append(lastPrice)
-            li.append(openInterest)
-            li.append(test.delta()[0])
+            li.append(float(bid))
+            li.append(float(ask))
+            li.append(float(lastPrice))
+            li.append(float(openInterest))
+            li.append(float(test.delta()[0]))
             grid.append(li)
         # create the dataframe
         my_df = pd.DataFrame(data=grid,columns=my_columns)
@@ -117,18 +117,18 @@ for ticker in col:
         data = yf.Ticker(ticker)
         row = find_10_delta_row(ticker,data,dt_string,friday,today)
 
-        li.append(row['currentPrice'])
-        li.append(row['strike'])
+        li.append(float(row['currentPrice']))
+        li.append(float(row['strike']))
 
         li.append(ticker)
-        li.append(row['strike'])
+        li.append(float(row['strike']))
 
-        li.append(row['bid'])
-        li.append(row['ask'])
-        li.append(row['lastPrice'])
-        li.append(row['openInterest'])
+        li.append(float(row['bid']))
+        li.append(float(row['ask']))
+        li.append(float(row['lastPrice']))
+        li.append(float(row['openInterest']))
 
-        li.append(row['delta'])
+        li.append(float(row['delta']))
         li.append(calcpnf.calcpnf(data,ticker,startDate))
 
     except Exception as e: print("Failed on ticker ", ticker, " ", e)
