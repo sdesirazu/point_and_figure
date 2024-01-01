@@ -118,17 +118,48 @@ for ticker in col:
         row = find_10_delta_row(ticker,data,dt_string,friday,today)
 
         li.append(float(row['currentPrice']))
+
         li.append(float(row['strike']))
 
         li.append(ticker)
+
         li.append(float(row['strike']))
 
-        li.append(float(row['bid']))
-        li.append(float(row['ask']))
-        li.append(float(row['lastPrice']))
-        li.append(float(row['openInterest']))
+        bid = float(row['bid'])
 
-        li.append(float(row['delta']))
+        if(math.isnan(bid)):
+            bid = 0.0
+
+        li.append(bid)
+
+        ask = float(row['ask'])
+
+        if(math.isnan(ask)):
+            ask = 0.0
+
+        li.append(ask)
+
+        lastPrice = float(row['lastPrice'])
+
+        if(math.isnan(lastPrice)):
+            lastPrice = 0.0
+
+        li.append(lastPrice)
+
+        openInterest = float(row['openInterest'])
+
+        if(math.isnan(openInterest)):
+            openInterest = 0.0
+
+        li.append(openInterest)
+
+        delta = float(row['delta'])
+
+        if(math.isnan(delta)):
+            delta = 0.0
+            
+        li.append(delta)
+
         li.append(calcpnf.calcpnf(data,ticker,startDate))
 
     except Exception as e: print("Failed on ticker ", ticker, " ", e)
@@ -138,6 +169,13 @@ for ticker in col:
     grid.append(li)
         
 location = "E"+str(init_row_number)+":N"+str(row_number)+""
+
+
+now_time = dt.now(timezone('Australia/Sydney'))
+fmt = "%Y-%m-%d %H:%M:%S %Z%z"
+now_time = now_time.strftime(fmt)
+
+sheet.update('B3', now_time)
 
 sheet.batch_update([{
     'range': location,
