@@ -37,7 +37,11 @@ def find_10_delta_row(ticker,data,dt_string,friday,today):
             lastPrice = row['lastPrice']
             openInterest = row['openInterest']
             impliedVolatility = row['impliedVolatility']
-
+            
+            # do not do if this number is 0.0
+            if (impliedVolatility) < 0.001:
+                continue
+                
             last_dividend = last_div_value.last_div_value(data)
             dividend_continuous_rate = last_dividend/data.info['currentPrice']
             num_days_to_expire = friday - today
