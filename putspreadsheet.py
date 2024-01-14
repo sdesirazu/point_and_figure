@@ -16,7 +16,7 @@ import calcpnf
 
 my_columns = ['currentPrice','strike','ticker','bid','ask','lastPrice','openInterest','delta']
 
-def find_10_delta_row(ticker,data,dt_string,friday,today):
+def find_10_delta_row(optionType, ticker,data,dt_string,friday,today):
     grid = []
     try:
         price = data.info['currentPrice']
@@ -37,16 +37,16 @@ def find_10_delta_row(ticker,data,dt_string,friday,today):
             lastPrice = row['lastPrice']
             openInterest = row['openInterest']
             impliedVolatility = row['impliedVolatility']
-            
+
             # do not do if this number is 0.0
             if (impliedVolatility) < 0.001:
                 continue
-                
+
             last_dividend = last_div_value.last_div_value(data)
             dividend_continuous_rate = last_dividend/data.info['currentPrice']
             num_days_to_expire = friday - today
         
-            test = BSMerton([-1,currentPrice,strike,risk_free_rate,dividend_continuous_rate,num_days_to_expire.days,impliedVolatility])
+            test = BSMerton([optionType,currentPrice,strike,risk_free_rate,dividend_continuous_rate,num_days_to_expire.days,impliedVolatility])
             li.append(float(currentPrice))
             li.append(float(strike))
             li.append(ticker)
@@ -120,7 +120,15 @@ for ticker in col:
     li = []
     try:
         data = yf.Ticker(ticker)
-        row = find_10_delta_row(ticker,data,dt_string,friday,today)
+        xoro = calcpnf.calcpnf(data,ticker,startDate)
+        if(xoro == 'X'):
+            optionType = -1
+        if(xoro == 'O'):
+            optionType = 1
+        if(xoro == 'U'):
+            continue
+
+        row = find_10_delta_row(optionType,ticker,data,dt_string,friday,today)
 
         li.append(float(row['currentPrice']))
 
@@ -165,7 +173,7 @@ for ticker in col:
             
         li.append(delta)
 
-        li.append(calcpnf.calcpnf(data,ticker,startDate))
+        li.append(xoro)
 
     except Exception as e: print("Failed on ticker ", ticker, " ", e)
 
@@ -186,5 +194,4 @@ sheet.batch_update([{
     'range': location,
     'values': grid,
 }])
-
 
