@@ -58,9 +58,9 @@ def find_10_delta_row(optionType, ticker,data,dt_string,friday,today):
             grid.append(li)
         # create the dataframe
         my_df = pd.DataFrame(data=grid,columns=my_columns)
-        if(optionType === -1):
+        if(optionType == -1):
             df_closest = my_df[my_df["delta"]>= -0.15]
-        if(optionType === 1):
+        if(optionType == 1):
            df_closest = my_df[my_df["delta"]>= 0.15]
         return df_closest.iloc[0]
 
