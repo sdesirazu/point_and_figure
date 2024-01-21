@@ -23,8 +23,16 @@ def find_10_delta_row(optionType, ticker,data,dt_string,friday,today):
         
         opt = data.option_chain(dt_string)
         
-        # Puts
-        df = opt.puts
+        # Puts or calls
+        if(optionType == -1):
+            df = opt.puts
+
+        if(optionType == 1):
+            df = opt.calls
+            
+        if(df.size == 0):
+            my_df = pd.DataFrame(data=grid,columns=my_columns)
+            return my_df
 
         df_sorted = df.sort_values(by='strike',ascending=False)
 
@@ -62,7 +70,7 @@ def find_10_delta_row(optionType, ticker,data,dt_string,friday,today):
             df_closest = my_df[my_df["delta"]>= -0.15]
         if(optionType == 1):
            df_closest = my_df[my_df["delta"]<= 0.15]
-        return df_closest.iloc[0]
+        return df_closest
 
     except Exception as e: print("Exception is ", e)
 
@@ -132,7 +140,11 @@ for ticker in col:
             continue
 
         row = find_10_delta_row(optionType,ticker,data,dt_string,friday,today)
-
+        if(row.size ==0):
+            continue
+        
+        row = row.iloc[0]
+        
         li.append(float(row['currentPrice']))
 
         li.append(float(row['strike']))
