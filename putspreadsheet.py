@@ -128,7 +128,11 @@ for ticker in col:
         continue
     if ticker == "Filter":
         continue
+    
     li = []
+    
+    row_number = row_number + 1
+    
     try:
         data = yf.Ticker(ticker)
         xoro = calcpnf.calcpnf(data,ticker,startDate)
@@ -191,8 +195,6 @@ for ticker in col:
         li.append(xoro)
 
     except Exception as e: print("Failed on ticker ", ticker, " ", e)
-
-    row_number = row_number + 1
 
     grid.append(li)
         
