@@ -194,12 +194,24 @@ for ticker in col:
 
         li.append(xoro)
 
-    except Exception as e: print("Failed on ticker ", ticker, " ", e)
-
     grid.append(li)
+
+    except Exception as e: 
+        print("Failed on ticker ", ticker, " ", e)
+        li.append(0.0)
+        li.append(0.0)
+        li.append(ticker)
+        li.append(0.0)
+        li.append(0.0)
+        li.append(0.0)
+        li.append(0.0)
+        li.append(0.0)            
+        li.append(0.0)
+        li.append("U")
+        grid.append(li)
+
         
 location = "E"+str(init_row_number)+":N"+str(row_number)+""
-
 
 now_time = dt.now(timezone('Australia/Sydney'))
 fmt = "%Y-%m-%d %H:%M:%S %Z%z"
