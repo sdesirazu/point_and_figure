@@ -130,7 +130,7 @@ for ticker in col:
         continue
     
     li = []
-    
+    grid.append(li)    
     row_number = row_number + 1
     
     try:
@@ -194,7 +194,6 @@ for ticker in col:
 
         li.append(xoro)
 
-    grid.append(li)
 
     except Exception as e: 
         print("Failed on ticker ", ticker, " ", e)
@@ -208,8 +207,6 @@ for ticker in col:
         li.append(0.0)            
         li.append(0.0)
         li.append("U")
-        grid.append(li)
-
         
 location = "E"+str(init_row_number)+":N"+str(row_number)+""
 
