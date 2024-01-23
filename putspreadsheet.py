@@ -203,7 +203,7 @@ for ticker in col:
 
         li.append(xoro)
         
-        li.append(rsi(float(ticker).iloc[0]))
+        li.append(float(rsi(ticker).iloc[0]))
 
     except Exception as e: 
         print("Failed on ticker ", ticker, " ", e)
