@@ -14,39 +14,17 @@ import last_div_value
 import rfr
 import calcpnf
 import numpy as np
+from pyfinviz.quote import Quote
 
 my_columns = ['currentPrice','strike','ticker','bid','ask','lastPrice','openInterest','delta']
   
-def rsi(prices, n=14):
-    """Compute the RSI given prices
-
-    :param prices: pandas.Series
-    :return: rsi
-    """
-
-    # Calculate the difference between the current and previous close price
-    delta = prices.diff()
-
-    # Calculate the sum of all positive changes
-    gain = delta.where(delta > 0, 0)
-
-    # Calculate the sum of all negative changes
-    loss = -delta.where(delta < 0, 0)
-
-    # Calculate the average gain over the last n periods
-    avg_gain = gain.rolling(n).mean()
-
-    # Calculate the average loss over the last n periods
-    avg_loss = loss.rolling(n).mean()
-
-    # Calculate the relative strength
-    rs = avg_gain / avg_loss
-
-    # Calculate the RSI
-    rsi = 100 - (100 / (1 + rs))
-
-    return rsi.iloc[rsi.size-1]
-
+def rsi(ticker):
+    quote = Quote(ticker=ticker)
+    # available variables:
+    if(!quote.exists):
+      return 0.0
+    return(quote.fundamental_df["RSI (14)"])
+  
 def find_10_delta_row(optionType, ticker,data,dt_string,friday,today):
     grid = []
     try:
@@ -224,9 +202,8 @@ for ticker in col:
         li.append(delta)
 
         li.append(xoro)
-        prices = yf.download([ticker])["Adj Close"]
-        li.append(rsi(prices))
-
+        
+        li.append(rsi(float(ticker).iloc[0]))
 
     except Exception as e: 
         print("Failed on ticker ", ticker, " ", e)
