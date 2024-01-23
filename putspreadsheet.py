@@ -21,7 +21,7 @@ my_columns = ['currentPrice','strike','ticker','bid','ask','lastPrice','openInte
 def rsi(ticker):
     quote = Quote(ticker=ticker)
     # available variables:
-    if(!quote.exists):
+    if(not quote.exists):
       return 0.0
     return(quote.fundamental_df["RSI (14)"])
   
