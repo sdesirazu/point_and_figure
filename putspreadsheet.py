@@ -13,8 +13,39 @@ from BSMerton import BSMerton
 import last_div_value
 import rfr
 import calcpnf
+import numpy as np
 
 my_columns = ['currentPrice','strike','ticker','bid','ask','lastPrice','openInterest','delta']
+  
+def rsi(prices, n=14):
+    """Compute the RSI given prices
+
+    :param prices: pandas.Series
+    :return: rsi
+    """
+
+    # Calculate the difference between the current and previous close price
+    delta = prices.diff()
+
+    # Calculate the sum of all positive changes
+    gain = delta.where(delta > 0, 0)
+
+    # Calculate the sum of all negative changes
+    loss = -delta.where(delta < 0, 0)
+
+    # Calculate the average gain over the last n periods
+    avg_gain = gain.rolling(n).mean()
+
+    # Calculate the average loss over the last n periods
+    avg_loss = loss.rolling(n).mean()
+
+    # Calculate the relative strength
+    rs = avg_gain / avg_loss
+
+    # Calculate the RSI
+    rsi = 100 - (100 / (1 + rs))
+
+    return rsi.iloc[rsi.size-1]
 
 def find_10_delta_row(optionType, ticker,data,dt_string,friday,today):
     grid = []
@@ -193,6 +224,8 @@ for ticker in col:
         li.append(delta)
 
         li.append(xoro)
+        prices = yf.download([ticker])["Adj Close"]
+        li.append(rsi(prices))
 
 
     except Exception as e: 
@@ -207,8 +240,9 @@ for ticker in col:
         li.append(0.0)            
         li.append(0.0)
         li.append("U")
+        li.append(0.0)
         
-location = "E"+str(init_row_number)+":N"+str(row_number)+""
+location = "E"+str(init_row_number)+":O"+str(row_number)+""
 
 now_time = dt.now(timezone('Australia/Sydney'))
 fmt = "%Y-%m-%d %H:%M:%S %Z%z"
