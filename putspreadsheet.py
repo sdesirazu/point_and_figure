@@ -225,7 +225,7 @@ now_time = dt.now(timezone('Australia/Sydney'))
 fmt = "%Y-%m-%d %H:%M:%S %Z%z"
 now_time = now_time.strftime(fmt)
 print(now_time)
-sheet.update('B3', "WHY")
+sheet.update('B3', ["WHY"])
 
 sheet.batch_update([{
     'range': location,
