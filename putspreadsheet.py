@@ -221,11 +221,11 @@ for ticker in col:
         
 location = "E"+str(init_row_number)+":O"+str(row_number)+""
 
-now_time = dt.now(timezone('Australia/Sydney'))
-fmt = "%Y-%m-%d %H:%M:%S %Z%z"
-now_time = now_time.strftime(fmt)
-print(now_time)
-sheet.update('B3', ["WHY"])
+#now_time = dt.now(timezone('Australia/Sydney'))
+#fmt = "%Y-%m-%d %H:%M:%S %Z%z"
+#now_time = now_time.strftime(fmt)
+#print(now_time)
+#sheet.update('B3', ["WHY"])
 
 sheet.batch_update([{
     'range': location,
