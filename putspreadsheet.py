@@ -224,8 +224,8 @@ location = "E"+str(init_row_number)+":O"+str(row_number)+""
 now_time = dt.now(timezone('Australia/Sydney'))
 fmt = "%Y-%m-%d %H:%M:%S %Z%z"
 now_time = now_time.strftime(fmt)
-
-sheet.update('B3', now_time)
+print(now_time)
+sheet.update('B3', "WHY")
 
 sheet.batch_update([{
     'range': location,
