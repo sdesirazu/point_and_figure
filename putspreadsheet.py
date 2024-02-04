@@ -21,7 +21,7 @@ my_columns = ['currentPrice','strike','ticker','bid','ask','lastPrice','openInte
 
 def earnings(ticker):
   for key in earnings_partition_days.keys():
-    mask = earnings_partition_days[key]['Ticker'].str.contains(ticker,regex=False)
+    mask = earnings_partition_days[key]['Ticker'].str.fullmatch("r'"+ticker+"'")
     if(mask.any()):
       return ("Yes")
   return ("No")
