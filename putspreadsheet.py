@@ -15,8 +15,19 @@ import rfr
 import calcpnf
 import numpy as np
 from pyfinviz.quote import Quote
+from finvizfinance.earnings import Earnings
 
 my_columns = ['currentPrice','strike','ticker','bid','ask','lastPrice','openInterest','delta']
+
+def earnings(ticker):
+  df = Earnings(period='Next Week')
+  partition_days = df.partition_days()
+  for key in partition_days.keys():
+    mask = partition_days[key]['Ticker'].str.contains(ticker,regex=False)
+    if(mask.any()):
+      return ("Yes")
+  return ("No")
+
   
 def rsi(ticker):
     quote = Quote(ticker=ticker)
