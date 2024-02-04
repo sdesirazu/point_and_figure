@@ -232,7 +232,7 @@ for ticker in col:
         
         li.append(float(rsi(ticker).iloc[0]))
 
-      li.append(ticker(ticker))
+      li.append(earnings(ticker))
 
     except Exception as e: 
         print("Failed on ticker ", ticker, " ", e)
