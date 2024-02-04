@@ -20,10 +20,8 @@ from finvizfinance.earnings import Earnings
 my_columns = ['currentPrice','strike','ticker','bid','ask','lastPrice','openInterest','delta']
 
 def earnings(ticker):
-  df = Earnings(period='Next Week')
-  partition_days = df.partition_days()
-  for key in partition_days.keys():
-    mask = partition_days[key]['Ticker'].str.contains(ticker,regex=False)
+  for key in earnings_partition_days.keys():
+    mask = earnings_partition_days[key]['Ticker'].str.contains(ticker,regex=False)
     if(mask.any()):
       return ("Yes")
   return ("No")
@@ -143,6 +141,11 @@ friday = today + timedelta( (4-today.weekday()) % 7 )
 dt_string = friday.strftime("%Y-%m-%d")
 risk_free_rate = rfr.get_rfr()
 
+# get the earnings once from finviz
+earnings_df = Earnings(period='Next Week')
+earnings_partition_days = earnings_df.partition_days()
+
+
 for ticker in col:
     if ticker == "Ticker":
         continue
@@ -176,6 +179,7 @@ for ticker in col:
             li.append(0.0)
             li.append("U")
             li.append(0.0)
+            li.append("Unknown")
 
             continue
         
@@ -228,6 +232,8 @@ for ticker in col:
         
         li.append(float(rsi(ticker).iloc[0]))
 
+      li.append(ticker(ticker))
+
     except Exception as e: 
         print("Failed on ticker ", ticker, " ", e)
         li.append(0.0)
@@ -241,8 +247,9 @@ for ticker in col:
         li.append(0.0)
         li.append("U")
         li.append(0.0)
+        li.append("Unknown")
         
-location = "E"+str(init_row_number)+":O"+str(row_number)+""
+location = "E"+str(init_row_number)+":P"+str(row_number)+""
 
 #now_time = dt.now(timezone('Australia/Sydney'))
 #fmt = "%Y-%m-%d %H:%M:%S %Z%z"
