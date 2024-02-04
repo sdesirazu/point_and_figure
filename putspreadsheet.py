@@ -154,6 +154,18 @@ for ticker in col:
 
         row = find_10_delta_row(optionType,ticker,data,dt_string,friday,today)
         if(row.size ==0):
+            li.append(0.0)
+            li.append(0.0)
+            li.append(ticker)
+            li.append(0.0)
+            li.append(0.0)
+            li.append(0.0)
+            li.append(0.0)
+            li.append(0.0)            
+            li.append(0.0)
+            li.append("U")
+            li.append(0.0)
+
             continue
         
         row = row.iloc[0]
