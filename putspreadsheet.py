@@ -164,6 +164,18 @@ for ticker in col:
         if(xoro == 'O'):
             optionType = 1
         if(xoro == 'U'):
+            li.append(0.0)
+            li.append(0.0)
+            li.append(ticker)
+            li.append(0.0)
+            li.append(0.0)
+            li.append(0.0)
+            li.append(0.0)
+            li.append(0.0)            
+            li.append(0.0)
+            li.append("U")
+            li.append(0.0)
+            li.append("Unknown")
             continue
 
         row = find_10_delta_row(optionType,ticker,data,dt_string,friday,today)
@@ -180,7 +192,6 @@ for ticker in col:
             li.append("U")
             li.append(0.0)
             li.append("Unknown")
-
             continue
         
         row = row.iloc[0]
