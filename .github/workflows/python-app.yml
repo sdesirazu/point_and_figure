@@ -7,7 +7,7 @@ name: Python application
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '55 23 * * FRI'
+    - cron:  '55 20 * * FRI'
 
 permissions:
   contents: read
