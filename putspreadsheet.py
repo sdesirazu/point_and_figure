@@ -262,14 +262,18 @@ for ticker in col:
         
 location = "E"+str(init_row_number)+":P"+str(row_number)+""
 
-#now_time = dt.now(timezone('Australia/Sydney'))
-#fmt = "%Y-%m-%d %H:%M:%S %Z%z"
-#now_time = now_time.strftime(fmt)
-#print(now_time)
-#sheet.update('B3', ["WHY"])
-
 sheet.batch_update([{
     'range': location,
     'values': grid,
+}])
+
+now_time = dt.now(timezone('Australia/Sydney'))
+fmt = "%Y-%m-%d %H:%M:%S %Z%z"
+now_time = now_time.strftime(fmt)
+print(now_time)
+location="B3:B3"
+sheet.batch_update([{
+    'range': location,
+    'values': [now_time],
 }])
 
