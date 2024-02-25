@@ -270,10 +270,4 @@ sheet.batch_update([{
 now_time = dt.now(timezone('Australia/Sydney'))
 fmt = "%Y-%m-%d %H:%M:%S %Z%z"
 now_time = now_time.strftime(fmt)
-print(now_time)
-location="B3:B3"
-sheet.batch_update([{
-    'range': location,
-    'values': [now_time],
-}])
-
+sheet.update_cell(3,2,now_time)
